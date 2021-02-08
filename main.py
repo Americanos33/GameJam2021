@@ -4,6 +4,11 @@ from Classes import Character
 import pygame
 from pygame.locals import *
 
+# Variables
+width = 1024
+height = 768
+rows = 16
+
 # Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -13,18 +18,27 @@ GREY = (127,127,127)
 pygame.init()
 
 
-def drawWindow(surface):
-    pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
+def drawGrid(w, r, surface):
+    sizeBtwn = w // r
+ 
+    x = 0
+    y = 0
+    for l in range(r):
+        x = x + sizeBtwn
+        y = y + sizeBtwn
+ 
+        pygame.draw.line(surface, (255,255,255), (x,0),(x,w))
+        pygame.draw.line(surface, (255,255,255), (0,y),(w,y))
+
+    #pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
     
 
-def redrawWindow(surface):
-    drawWindow(surface)
+def redrawWindow(w, r, surface):
+    drawGrid(w, r, surface)
     pygame.display.update()
 
 def main():
     # Size elements
-    width = 1024
-    height = 768
     win = pygame.display.set_mode((width, height))
 
     # Images
@@ -54,7 +68,7 @@ def main():
         win.blit(orange, (500, 593))
         win.blit(date, (700, 593))
 
-        redrawWindow(win)
+        redrawWindow(width, rows, win)
 
         for event in pygame.event.get():
             if event.type == QUIT:
