@@ -1,3 +1,5 @@
+import Classes
+from Classes import *
 import pygame
 from pygame.locals import *
 
@@ -8,22 +10,6 @@ GREY = (127,127,127)
 
 # Pygame initialization
 pygame.init()
-
-# Classes
-
-class Character :
-
-    def __init__(self, x, y):
-        self.dx = 0 # X directionn
-        self.dy = 0 # Y direction
-        self.image = pygame.image.load("images/perso1.png").convert()
-
-        self.rect = self.image.get_rect()
-        self.rect.left = x
-        self.rect.bottom = y
-        self.win = True
-
-    #def draw(self):
 
 
 def drawWindow(surface):
