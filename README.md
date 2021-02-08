@@ -1,1 +1,3 @@
 # GameJam2021
+
+Histoire : Un monde de forêt dans lequel les fruits sont les enfants des légumes. Notre personnage est un humain. Il se lève un jour et graille des fruits, puis retourne se coucher. Le père de tous ces fruits est en colère contre notre perso, donc il lui vole son lit. Le voyage commence alors pour nous, notre but étant de récupérer ce putain de lit. Notre mode de combat se base sur le sommeil, nous plongeons les ennemis dans un sommeil afin de pouvoir les attaquer.
