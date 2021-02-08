@@ -13,16 +13,12 @@ pygame.init()
 win = pygame.display.set_mode((width, height))
 
 # Character initialization
-carac = Character.Character((0,576))
+carac = Character.Character(0,576)
 
 # Colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREY = (127,127,127)
-
-# Pygame initialization
-pygame.init()
-win = pygame.display.set_mode((width, height))
 
 # Images
 levelBackground = pygame.image.load('images/ciel_jour.jpg')
@@ -59,15 +55,15 @@ def drawGrid(w, r, surface):
     #pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
     
 
-def redrawWindow(w, r, surface):
+def redrawWindow():
     win.blit(levelBackground, (0,0))
-    carac.draw(surface)
-    surface.blit(banane, (150, 576))
-    surface.blit(orange, (300, 576))
-    surface.blit(date, (450, 576))
-    surface.blit(fraise, (600, 576))
-    surface.blit(pasteque, (750, 576))
-    drawGrid(w, r, surface)
+    carac.draw(win)
+    win.blit(banane, (150, 576))
+    win.blit(orange, (300, 576))
+    win.blit(date, (450, 576))
+    win.blit(fraise, (600, 576))
+    win.blit(pasteque, (750, 576))
+    drawGrid(width, rows, win)
     pygame.display.update()
 
 def main():
@@ -76,7 +72,26 @@ def main():
     clock = pygame.time.Clock()
 
     while inGame:
-        redrawWindow(width, rows, win)
+
+        print(carac.dx)
+
+        for event in pygame.event.get():
+            if event.type == KEYUP:
+                if event.key == K_LEFT and carac.dx < 0: # PROBLEME ICI : carac.dx  ne fonctionne pas comme prévu
+                    carac.stop()
+                if event.key == K_RIGHT and carac.dx > 0: # PROBLEME ICI : carac.dx  ne fonctionne pas comme prévu
+                    carac.stop()
+            if event.type == KEYDOWN:
+                if event.key == K_LEFT :
+                    carac.moveLeft()
+                if event.key == K_RIGHT :
+                    carac.moveRight()
+                if event.key == K_DOWN :
+                    carac.stop()
+
+        carac.move()
+
+        redrawWindow()
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -84,7 +99,8 @@ def main():
                 pygame.display.quit()
                 pygame.quit()
 
-    pass
+    pygame.time.delay(1)
+    clock.tick(120)
 
 
 main()
