@@ -7,7 +7,7 @@ from pygame.locals import *
 # Variables
 width = 1024
 height = 768
-rows = 16
+rows = 32
 
 # Colors
 BLACK = (0, 0, 0)
@@ -45,16 +45,16 @@ def main():
     levelBackground = pygame.image.load('images/ciel_jour.jpg')
     levelBackground = pygame.transform.scale(levelBackground, (width, height))
 
-    carac = Character.Character(0,593)
+    carac = Character.Character((0,576))
 
     banane = pygame.image.load('images/banane.png')
-    banane = pygame.transform.smoothscale(banane, (40,40))
+    banane = pygame.transform.smoothscale(banane, (32,32))
 
     orange = pygame.image.load('images/oranepd.png')
-    orange = pygame.transform.smoothscale(orange, (40,40))
+    orange = pygame.transform.smoothscale(orange, (32,32))
 
     date = pygame.image.load('images/dategre.png')
-    date = pygame.transform.smoothscale(date, (80,80))
+    date = pygame.transform.smoothscale(date, (32,32))
 
     # Game runing variables
     inGame = True
@@ -64,9 +64,9 @@ def main():
 
         win.blit(levelBackground, (0,0))
         carac.draw(win)
-        win.blit(banane, (200, 593))
-        win.blit(orange, (500, 593))
-        win.blit(date, (700, 593))
+        win.blit(banane, (200, 576))
+        win.blit(orange, (500, 576))
+        win.blit(date, (700, 576))
 
         redrawWindow(width, rows, win)
 
