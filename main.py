@@ -1,30 +1,79 @@
 import pygame
 from pygame.locals import *
 
+# Colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREY = (127,127,127)
+
 # Pygame initialization
 pygame.init()
 
+# Classes
+
+class Character :
+
+    def __init__(self, x, y):
+        self.dx = 0 # X directionn
+        self.dy = 0 # Y direction
+        self.image = pygame.image.load("images/perso1.png").convert()
+
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.bottom = y
+        self.win = True
+
+    #def draw(self):
+
+
 def drawWindow(surface):
-    pygame.draw.rect(surface, (255,255,255), (100,100,100,100))
+    pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
+    
 
 def redrawWindow(surface):
     drawWindow(surface)
     pygame.display.update()
 
 def main():
+    # Size elements
     width = 1024
     height = 768
     win = pygame.display.set_mode((width, height))
 
-    flag = True
+    # Images
+    levelBackground = pygame.image.load('images/ciel_jour.jpg')
+    levelBackground = pygame.transform.scale(levelBackground, (width, height))
+
+    carac = pygame.image.load('images/personnage1.png').convert_alpha()
+    carac = pygame.transform.scale(carac, (75,75))
+    carac.set_colorkey((240,240,240))
+
+    banane = pygame.image.load('images/banane.png')
+    banane = pygame.transform.smoothscale(banane, (40,40))
+
+    orange = pygame.image.load('images/oranepd.png')
+    orange = pygame.transform.smoothscale(orange, (40,40))
+
+    date = pygame.image.load('images/dategre.png')
+    date = pygame.transform.smoothscale(date, (80,80))
+
+    # Game runing variables
+    inGame = True
     clock = pygame.time.Clock()
 
-    while flag:
+    while inGame:
+
+        win.blit(levelBackground, (0,0))
+        win.blit(carac, (0,593))
+        win.blit(banane, (200, 593))
+        win.blit(orange, (500, 593))
+        win.blit(date, (700, 593))
+
         redrawWindow(win)
 
         for event in pygame.event.get():
             if event.type == QUIT:
-                flag = False
+                inGame = False
                 pygame.display.quit()
                 pygame.quit()
 
