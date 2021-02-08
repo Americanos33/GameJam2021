@@ -4,9 +4,6 @@ from pygame.locals import *
 # Pygame initialization
 pygame.init()
 
-# Keys
-
-
 def drawWindow(surface):
     pygame.draw.rect(surface, (255,255,255), (100,100,100,100))
 
@@ -30,8 +27,6 @@ def main():
                 flag = False
                 pygame.display.quit()
                 pygame.quit()
-                sys.quit()
-                break
 
     pass
 
