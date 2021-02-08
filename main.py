@@ -1,5 +1,6 @@
 import Classes
-from Classes import *
+from Classes import Character
+#from Character import *
 import pygame
 from pygame.locals import *
 
@@ -30,9 +31,7 @@ def main():
     levelBackground = pygame.image.load('images/ciel_jour.jpg')
     levelBackground = pygame.transform.scale(levelBackground, (width, height))
 
-    carac = pygame.image.load('images/personnage1.png').convert_alpha()
-    carac = pygame.transform.scale(carac, (75,75))
-    carac.set_colorkey((240,240,240))
+    carac = Character.Character(0,593)
 
     banane = pygame.image.load('images/banane.png')
     banane = pygame.transform.smoothscale(banane, (40,40))
@@ -50,7 +49,7 @@ def main():
     while inGame:
 
         win.blit(levelBackground, (0,0))
-        win.blit(carac, (0,593))
+        carac.draw(win)
         win.blit(banane, (200, 593))
         win.blit(orange, (500, 593))
         win.blit(date, (700, 593))
