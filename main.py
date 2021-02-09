@@ -76,6 +76,10 @@ def main():
         print(carac.dx)
 
         for event in pygame.event.get():
+            if event.type == QUIT:
+                inGame = False
+                pygame.display.quit()
+                pygame.quit()
             if event.type == KEYUP:
                 if event.key == K_LEFT and carac.dx < 0: # PROBLEME ICI : carac.dx  ne fonctionne pas comme prévu
                     carac.stop()
@@ -91,16 +95,12 @@ def main():
 
         carac.move()
 
+        carac.dx = 0
+
         redrawWindow()
 
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                inGame = False
-                pygame.display.quit()
-                pygame.quit()
-
-    pygame.time.delay(1)
-    clock.tick(120)
+        pygame.time.delay(1)
+        clock.tick(120)
 
 
 main()
