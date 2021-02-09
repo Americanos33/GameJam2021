@@ -1,2 +1,1 @@
-$ cat .gitignore
-/Classes/__pycache__
+Classes/__pycache__/
