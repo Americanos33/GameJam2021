@@ -1,4 +1,5 @@
 import pygame
+import time
 from pygame.locals import *
 
 
@@ -36,6 +37,11 @@ class Player(pygame.sprite.Sprite) :
     def printImage(self):
         self.image = pygame.transform.scale(self.image, (64,64))
         self.image.set_colorkey((240,240,240))
+
+
+    def moveSaut(self):
+        self.rect.y += -1   
+
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
