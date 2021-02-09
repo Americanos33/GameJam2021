@@ -41,6 +41,10 @@ fraise = pygame.transform.smoothscale(fraise, (32,32))
 
 pasteque = pygame.image.load('images/pasteqq.png')
 pasteque = pygame.transform.smoothscale(pasteque, (32,32))
+
+wall = pygame.image.load('images/Wall.png')
+wall = pygame.transform.smoothscale(wall, (32,32))
+
 menuBackground = pygame.image.load('images/menu1.jpg')
 menuBackground = pygame.transform.scale(menuBackground, (width, height))
 
@@ -67,6 +71,7 @@ def redrawWindow():
     win.blit(date, (448, 576))
     win.blit(fraise, (578, 576))
     win.blit(pasteque, (736, 576))
+    win.blit(wall, (800, 576))
     drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     pygame.display.update()
