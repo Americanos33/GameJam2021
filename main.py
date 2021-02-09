@@ -7,11 +7,13 @@ from pygame.locals import *
 width = 1024
 height = 768
 rows = 32
+currentLevel = 0
 
 # Pygame initialization
 pygame.init()
 pygame.display.set_caption("Le lit perdu")
 win = pygame.display.set_mode((width, height))
+clock = pygame.time.Clock()
 
 # Character initialization
 game = Game()
@@ -74,7 +76,7 @@ def main():
     # Game runing variables
     inGame = False
     inMenu = True
-    clock = pygame.time.Clock()
+
     while True:
 
         if inGame:
@@ -94,6 +96,7 @@ def main():
                     inGame = False
                     pygame.display.quit()
                     pygame.quit()
+                    break
 
                 if event.type == KEYDOWN:
                     game.pressed[event.key] = True
@@ -102,22 +105,25 @@ def main():
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.move()
             game.player.moveSaut()
-            
-            pygame.time.delay(1)
-            clock.tick(60)
+
 
         elif inMenu:
             for event in pygame.event.get():
                 if event.type == QUIT:
+                    inMenu = False
+                    pygame.display.quit()
                     pygame.quit()
                     sys.exit()
+                    break
                 if event.type == KEYDOWN:      
                     if event.key == K_SPACE:
                         inMenu = False
                         inGame = True
             win.blit(menuBackground, (0,0))
-        pygame.display.flip()
+            
+        pygame.display.update()
+        pygame.time.delay(2)
+        clock.tick(60)
 
 main()

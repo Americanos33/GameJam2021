@@ -28,31 +28,17 @@ class Player(pygame.sprite.Sprite) :
         self.nb_saut = 0
         self.a_sauter = False
 
-    def move(self) :
-
-        # UPDATE the position of the character if the collisions allow it
-        #self.grav()
-        
-        self.rect.x += self.dx
-        #self.collisionX(collisionList)
-        
-        
-        self.rect.y += self.dy
-        #self.collisionY(collisionList)
-
-
-
     def moveRight(self):
 
         #moves the character to the Right and changes the character image accordingly
-        self.dx = self.velocity
+        self.rect.x += self.velocity
         self.image = pygame.image.load("images/personnage1.png").convert_alpha()
         self.printImage(1)
 
     def moveLeft(self):
         
         #moves the character to the Left and changes the character image accordingly
-        self.dx = -self.velocity
+        self.rect.x += -self.velocity
         self.image = pygame.image.load("images/personnage2.png").convert_alpha()
         self.printImage(2)
 
@@ -67,11 +53,11 @@ class Player(pygame.sprite.Sprite) :
 
     def moveSaut(self):
         if self.a_sauter :
-            if self.saut_monte >=5:
-                self.saut_descend -= 1
+            if self.saut_monte >= 5:
+                self.saut_descend -= 1.5
                 self.saut = self.saut_descend
             else: 
-                self.saut_monte += 1
+                self.saut_monte += 2
                 self.saut = self.saut_monte
             
             if self.saut_descend < 0:
