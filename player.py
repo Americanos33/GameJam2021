@@ -16,8 +16,14 @@ class Player(pygame.sprite.Sprite) :
 
         self.rect = self.image.get_rect()
         self.rect.x = 0
-        self.rect.y = 606
+        self.rect.y = 608
         self.win = True
+
+        self.saut = 0
+        self.saut_monte = 0
+        self.saut_descend = 5
+        self.nb_saut = 0
+        self.a_sauter = False
 
 
     def moveRight(self):
@@ -40,7 +46,20 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        self.rect.y += -1   
+        if self.a_sauter :
+            if self.saut_monte >=5:
+                self.saut_descend -= 1
+                self.saut = self.saut_descend
+            else: 
+                self.saut_monte += 1
+                self.saut = self.saut_monte
+            
+            if self.saut_descend < 0:
+                self.saut_monte = 0
+                self.saut_descend = 5
+                self.a_sauter = False
+
+        self.rect.y = self.rect.y - (10 * (self.saut/2))  
 
 
     def draw(self, surface) :
