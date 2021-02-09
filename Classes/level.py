@@ -2,10 +2,9 @@ class Level :
 
         def __init__(self,levelNumber):
                 
-                self.levelName = 'Platformer-master/levels/level' + str(levelNumber) + '.txt'
+                self.levelName = 'Levels/level' + str(levelNumber) + '.txt'
                 self.levelList = []
                 self.collisionList = []
-                self.numberOfCoins = 0
 
         def readMap(self):
 
@@ -25,18 +24,19 @@ class Level :
                 self.levelList = self.readMap()
                 
                 for j in range(len(self.levelList)):
-                        for i in range(len(self.levelList[j])):
-                                if self.levelList[j][i] == 't' :
-                                        self.collisionList.append((Platform(i,j), 't'))
-                                elif self.levelList[j][i] == 'd' :
-                                        self.collisionList.append((Door(i,j), 'd'))
-                                elif self.levelList[j][i] == 'm' :
-                                        self.collisionList.append((Jumper(i,j), 'm'))
-                                elif self.levelList[j][i] == 'c' :
-                                        self.collisionList.append((Coin(i,j), 'c'))
-                                        self.numberOfCoins += 1
-                                elif self.levelList[j][i] == 's' :
-                                        self.collisionList.append((Spikes(i,j), 's'))
+                    for i in range(len(self.levelList[j])):
+                        if self.levelList[j][i] == '1' :
+                            self.collisionList.append((Wall(i,j,surface), '1'))
+                        if self.levelList[j][i] == '2'
+                            self.collisionList.append((Banane(i,j,surface), '2'))
+                        if self.levelList[j][i] == '3'
+                            self.collisionList.append((Orange(i,j,surface), '3'))
+                        if self.levelList[j][i] == '4'
+                            self.collisionList.append((Fraise(i,j,surface), '4'))
+                        if self.levelList[j][i] == '5'
+                            self.collisionList.append((Date(i,j,surface), '5'))
+                        if self.levelList[j][i] == '6'
+                            self.collisionList.append((Pasteque(i,j,surface), '6'))
             
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()
