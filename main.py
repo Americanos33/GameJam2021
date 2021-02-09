@@ -30,16 +30,16 @@ levelBackground = pygame.transform.scale(levelBackground, (width, height))
 banane = pygame.image.load('images/banane.png')
 banane = pygame.transform.smoothscale(banane, (32,32))
 
-orange = pygame.image.load('images/oranepd.png')
+orange = pygame.image.load('images/orange.png')
 orange = pygame.transform.smoothscale(orange, (32,32))
 
-date = pygame.image.load('images/dategre.png')
+date = pygame.image.load('images/date.png')
 date = pygame.transform.smoothscale(date, (32,32))
 
 fraise = pygame.image.load('images/fraise.png')
 fraise = pygame.transform.smoothscale(fraise, (32,32))
 
-pasteque = pygame.image.load('images/pasteqq.png')
+pasteque = pygame.image.load('images/pasteque.png')
 pasteque = pygame.transform.smoothscale(pasteque, (32,32))
 
 wall = pygame.image.load('images/Wall.png')
