@@ -1,6 +1,6 @@
 import Classes
 from game import Game
-import pygame
+import pygame, sys
 from pygame.locals import *
 
 # Variables
@@ -39,7 +39,8 @@ fraise = pygame.transform.smoothscale(fraise, (32,32))
 
 pasteque = pygame.image.load('images/pasteqq.png')
 pasteque = pygame.transform.smoothscale(pasteque, (32,32))
-
+menuBackground = pygame.image.load('images/menu1.jpg')
+menuBackground = pygame.transform.scale(menuBackground, (width, height))
 
 def drawGrid(w, r, surface):
     sizeBtwn = w // r
@@ -71,38 +72,43 @@ def redrawWindow():
 
 def main():
     # Game runing variables
-    inGame = True
+    inGame = False
+    inMenu = True
     clock = pygame.time.Clock()
+    while True:
 
-    while inGame:
+        if inGame:
 
-        redrawWindow()
+            redrawWindow()
 
-        if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
-            game.player.moveRight()
-        elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-            game.player.moveLeft()
+            if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
+                game.player.moveRight()
+            elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+                game.player.moveLeft()
 
-        if game.player.rect.y >= 609:
-            game.player.rect.y=604
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    inGame = False
+                    pygame.display.quit()
+                    pygame.quit()
+                
+                if event.type == KEYDOWN:
+                    game.pressed[event.key] = True
+                elif event.type == KEYUP:
+                    game.pressed[event.key] = False
 
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                inGame = False
-                pygame.display.quit()
-                pygame.quit()
-            
-            if event.type == KEYDOWN:
-                game.pressed[event.key] = True
-                if event.key == pygame.K_UP:
-                    game.player.a_sauter=True
-            elif event.type == KEYUP:
-                game.pressed[event.key] = False
-
-        game.player.moveSaut()
-        
-        pygame.time.delay(1)
-        clock.tick(60)
-
+            pygame.time.delay(1)
+            clock.tick(120)
+        elif inMenu:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == KEYDOWN:      
+                    if event.key == K_SPACE:
+                        inMenu = False
+                        inGame = True
+            win.blit(menuBackground, (0,0))
+        pygame.display.flip()
 
 main()
