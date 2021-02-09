@@ -91,11 +91,13 @@ def main():
             
             if event.type == KEYDOWN:
                 game.pressed[event.key] = True
+                if event.key == pygame.K_UP:
+                    game.player.moveSaut()
             elif event.type == KEYUP:
                 game.pressed[event.key] = False
 
         pygame.time.delay(1)
-        clock.tick(120)
+        clock.tick(60)
 
 
 main()
