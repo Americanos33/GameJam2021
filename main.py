@@ -1,4 +1,5 @@
 import Classes
+from Classes import Level
 from game import Game
 import pygame, sys
 from pygame.locals import *
@@ -102,7 +103,6 @@ def main():
                     pygame.display.quit()
                     pygame.quit()
                     break
-
                 if event.type == KEYDOWN:
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
@@ -126,6 +126,12 @@ def main():
                         inMenu = False
                         inGame = True
             win.blit(menuBackground, (0,0))
+
+        level = Level.Level(currentLevel)
+        level.createLevelPlatformList()
+
+        for plat in level.collisionList :
+            plat[0].draw()
             
         pygame.display.update()
         pygame.time.delay(2)

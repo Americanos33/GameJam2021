@@ -1,3 +1,10 @@
+import Classes
+from Classes.Wall import Wall
+import pygame, sys
+from pygame.locals import *
+
+surface = pygame.display.get_surface
+
 class Level :
 
         def __init__(self,levelNumber):
@@ -26,17 +33,17 @@ class Level :
                 for j in range(len(self.levelList)):
                     for i in range(len(self.levelList[j])):
                         if self.levelList[j][i] == '1' :
-                            self.collisionList.append((Wall(i,j,surface), '1'))
-                        if self.levelList[j][i] == '2'
-                            self.collisionList.append((Banane(i,j,surface), '2'))
-                        if self.levelList[j][i] == '3'
-                            self.collisionList.append((Orange(i,j,surface), '3'))
-                        if self.levelList[j][i] == '4'
-                            self.collisionList.append((Fraise(i,j,surface), '4'))
-                        if self.levelList[j][i] == '5'
-                            self.collisionList.append((Date(i,j,surface), '5'))
-                        if self.levelList[j][i] == '6'
-                            self.collisionList.append((Pasteque(i,j,surface), '6'))
+                            self.collisionList.append((Wall(i,j), '1'))
+                        if self.levelList[j][i] == '2' :
+                            self.collisionList.append((Banane(i,j), '2'))
+                        if self.levelList[j][i] == '3' :
+                            self.collisionList.append((Orange(i,j), '3'))
+                        if self.levelList[j][i] == '4' :
+                            self.collisionList.append((Fraise(i,j), '4'))
+                        if self.levelList[j][i] == '5' :
+                            self.collisionList.append((Date(i,j), '5'))
+                        if self.levelList[j][i] == '6' :
+                            self.collisionList.append((Pasteque(i,j), '6'))
             
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()

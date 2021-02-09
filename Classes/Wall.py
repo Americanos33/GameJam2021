@@ -1,6 +1,6 @@
-import Stuff
+import Classes
+from Classes.Stuff import Stuff
+class Wall(Stuff) :
 
-class Wall(Stuff, surface) :
-
-    def __init__(self, X, Y, surface) :
-        Stuff.__init__(self, X, Y, "Wall", surface)
+    def __init__(self, X, Y) :
+        Stuff.__init__(self, X, Y, "wall")
