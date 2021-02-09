@@ -86,19 +86,28 @@ def main():
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
                 game.player.moveLeft()
 
+            if game.player.rect.y >= 609:
+                game.player.rect.y=604
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     inGame = False
                     pygame.display.quit()
                     pygame.quit()
-                
+
                 if event.type == KEYDOWN:
                     game.pressed[event.key] = True
+                    if event.key == pygame.K_UP:
+                        game.player.a_sauter=True
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
+            game.player.move()
+            game.player.moveSaut()
+            
             pygame.time.delay(1)
-            clock.tick(120)
+            clock.tick(60)
+
         elif inMenu:
             for event in pygame.event.get():
                 if event.type == QUIT:
