@@ -1,5 +1,5 @@
 import Classes
-from Classes import Character
+from game import Game
 import pygame
 from pygame.locals import *
 
@@ -10,10 +10,11 @@ rows = 32
 
 # Pygame initialization
 pygame.init()
+pygame.display.set_caption("Le lit perdu")
 win = pygame.display.set_mode((width, height))
 
 # Character initialization
-carac = Character.Character(0,576)
+game = Game()
 
 # Colors
 BLACK = (0, 0, 0)
@@ -57,14 +58,16 @@ def drawGrid(w, r, surface):
 
 def redrawWindow():
     win.blit(levelBackground, (0,0))
-    carac.draw(win)
-    win.blit(banane, (150, 576))
-    win.blit(orange, (300, 576))
-    win.blit(date, (450, 576))
-    win.blit(fraise, (600, 576))
-    win.blit(pasteque, (750, 576))
+    game.player.draw(win)
+    win.blit(banane, (128, 576))
+    win.blit(orange, (288, 576))
+    win.blit(date, (448, 576))
+    win.blit(fraise, (578, 576))
+    win.blit(pasteque, (736, 576))
     drawGrid(width, rows, win)
+    pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     pygame.display.update()
+
 
 def main():
     # Game runing variables
@@ -73,31 +76,23 @@ def main():
 
     while inGame:
 
-        print(carac.dx)
+        redrawWindow()
+
+        if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
+            game.player.moveRight()
+        elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+            game.player.moveLeft()
 
         for event in pygame.event.get():
             if event.type == QUIT:
                 inGame = False
                 pygame.display.quit()
                 pygame.quit()
-            if event.type == KEYUP:
-                if event.key == K_LEFT and carac.dx < 0: # PROBLEME ICI : carac.dx  ne fonctionne pas comme prévu
-                    carac.stop()
-                if event.key == K_RIGHT and carac.dx > 0: # PROBLEME ICI : carac.dx  ne fonctionne pas comme prévu
-                    carac.stop()
+            
             if event.type == KEYDOWN:
-                if event.key == K_LEFT :
-                    carac.moveLeft()
-                if event.key == K_RIGHT :
-                    carac.moveRight()
-                if event.key == K_DOWN :
-                    carac.stop()
-
-        carac.move()
-
-        carac.dx = 0
-
-        redrawWindow()
+                game.pressed[event.key] = True
+            elif event.type == KEYUP:
+                game.pressed[event.key] = False
 
         pygame.time.delay(1)
         clock.tick(120)
