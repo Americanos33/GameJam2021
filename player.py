@@ -1,5 +1,6 @@
 import pygame
 import time
+from projectile import Projectile
 from pygame.locals import *
 import Classes
 from Classes.Level import Level
@@ -8,6 +9,8 @@ from Classes.Level import Level
 class Player(pygame.sprite.Sprite) :
 
     def __init__(self):
+        super().__init__()
+
         self.health = 100
         self.max_health = 100
         self.attack = 10
@@ -30,7 +33,10 @@ class Player(pygame.sprite.Sprite) :
         self.nb_saut = 0
         self.a_sauter = False
 
-    def moveRight(self, level):
+        self.tt_projectiles = pygame.sprite.Group()
+
+
+    def moveRight(self):
 
         #moves the character to the Right and changes the character image accordingly
         
@@ -75,6 +81,9 @@ class Player(pygame.sprite.Sprite) :
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
+
+    def lancer_projectile(self):
+        self.tt_projectiles.add(Projectile(self))
 
     def collisionX(self, level) :
         
@@ -143,6 +152,3 @@ class Player(pygame.sprite.Sprite) :
                 if c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
-                    return True
-                else:
-                    return True
