@@ -43,7 +43,7 @@ fraise = pygame.transform.smoothscale(fraise, (32,32))
 pasteque = pygame.image.load('images/pasteque.png')
 pasteque = pygame.transform.smoothscale(pasteque, (32,32))
 
-wall = pygame.image.load('images/Wall.png')
+wall = pygame.image.load('images/wall.png')
 wall = pygame.transform.smoothscale(wall, (32,32))
 
 menuBackground = pygame.image.load('images/menu1.jpg')
@@ -70,7 +70,7 @@ def redrawWindow():
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
-    drawGrid(width, rows, win)
+    #drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
 
 
@@ -88,13 +88,13 @@ def main():
             redrawWindow()
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
-                game.player.moveRight()
-                game.player.collisionX(level)
-                game.player.collisionY(level)
+                if (game.player.collisionX(level) or game.player.collisionY(level)):
+                    game.player.moveRight()
+
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-                game.player.moveLeft()
-                game.player.collisionX(level)
-                game.player.collisionY(level)
+                if (game.player.collisionX(level) or game.player.collisionY(level)):
+                    game.player.moveLeft()
+
 
             if game.player.rect.y >= 609:
                 game.player.rect.y=604
@@ -115,10 +115,9 @@ def main():
                         game.player.lancer_projectile2()
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
-
-            game.player.moveSaut()
-            game.player.collisionX(level)
-            game.player.collisionY(level)
+            if (game.player.collisionX(level) or game.player.collisionY(level)):
+                game.player.moveSaut()
+                
 
 
         elif inMenu:

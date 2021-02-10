@@ -40,6 +40,7 @@ class Player(pygame.sprite.Sprite) :
     def moveRight(self):
 
         #moves the character to the Right and changes the character image accordingly
+        
         self.rect.x += self.velocity
         self.image = pygame.image.load("images/personnage1.png").convert_alpha()
         self.printImage(1)
@@ -47,6 +48,7 @@ class Player(pygame.sprite.Sprite) :
     def moveLeft(self):
         
         #moves the character to the Left and changes the character image accordingly
+        
         self.rect.x += -self.velocity
         self.image = pygame.image.load("images/personnage2.png").convert_alpha()
         self.printImage(2)
@@ -61,7 +63,8 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        if self.a_sauter and self.nb_saut > 0:
+        if self.a_sauter :
+            
             if self.saut_monte >= 5:
                 self.saut_descend -= 1.5
                 self.saut = self.saut_descend
@@ -94,24 +97,33 @@ class Player(pygame.sprite.Sprite) :
                 if c[1] == '1':
                     #Contre un mur
                     if self.dx > 0 :
-                        self.rect.right = c[0].rect.left   
+                        self.rect.right = c[0].rect.left
+                        return False   
                     elif self.dx < 0 :
                         self.rect.left = c[0].rect.right
+                        return False
                 if c[1] == '2':
                     #Contre une banane
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '3' :
                     #Contre une orange
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '4' :
                     #Contre une fraise
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '5' :
                     #Contre une date
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
+                    return True
+                else:
+                    return True
 
     def collisionY(self, level) :
                 
@@ -121,21 +133,27 @@ class Player(pygame.sprite.Sprite) :
                     if self.dy > 0 :
                         self.rect.bottom = c[0].rect.top 
                         self.dy = 0
+                        return False
                     if self.dy < 0 :
                         self.rect.top = c[0].rect.bottom
                         self.dy = 0
+                        return False
                 if c[1] == '2':
                     #Contre une banane
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '3' :
                     #Contre une orange
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '4' :
                     #Contre une fraise
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '5' :
                     #Contre une date
                     level.collisionList.remove(c)
+                    return True
                 if c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
