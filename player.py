@@ -1,6 +1,8 @@
 import pygame
 import time
 from pygame.locals import *
+import Classes
+from Classes.level import Level
 
 
 class Player(pygame.sprite.Sprite) :
@@ -70,3 +72,56 @@ class Player(pygame.sprite.Sprite) :
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
+
+    def collisionX(self, level) :
+        
+        for c in level.collisionList :
+            if c[0].rect.colliderect(self.rect) :
+                if c[1] == '1':
+                    #Contre un mur
+                    if self.dx > 0 :
+                        self.rect.right = c[0].rect.left   
+                    elif self.dx < 0 :
+                        self.rect.left = c[0].rect.right
+                if c[1] == '2':
+                    #Contre une banane
+                    level.collisionList.remove(c)
+                if c[1] == '3' :
+                    #Contre une orange
+                    level.collisionList.remove(c)
+                if c[1] == '4' :
+                    #Contre une fraise
+                    level.collisionList.remove(c)
+                if c[1] == '5' :
+                    #Contre une date
+                    level.collisionList.remove(c)
+                if c[1] == '6' :
+                    #Contre une pastèque
+                    level.collisionList.remove(c)
+
+    def collisionY(self, level) :
+                
+        for c in level.collisionList :
+            if c[0].rect.colliderect(self.rect) :
+                if c[1] == '1':
+                    if self.dy > 0 :
+                        self.rect.bottom = c[0].rect.top 
+                        self.dy = 0
+                    if self.dy < 0 :
+                        self.rect.top = c[0].rect.bottom
+                        self.dy = 0
+                if c[1] == '2':
+                    #Contre une banane
+                    level.collisionList.remove(c)
+                if c[1] == '3' :
+                    #Contre une orange
+                    level.collisionList.remove(c)
+                if c[1] == '4' :
+                    #Contre une fraise
+                    level.collisionList.remove(c)
+                if c[1] == '5' :
+                    #Contre une date
+                    level.collisionList.remove(c)
+                if c[1] == '6' :
+                    #Contre une pastèque
+                    level.collisionList.remove(c)
