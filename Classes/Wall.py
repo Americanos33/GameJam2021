@@ -17,3 +17,5 @@ class Wall(pygame.sprite.Sprite) :
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+        #r = pygame.Surface((self.rect.width, self.rect.height))
+        #surface.blit(r, self.rect)
