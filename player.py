@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite) :
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 10
+        self.attack = 30
         self.velocity = 3
         
         self.dx = 0
@@ -127,3 +127,21 @@ class Player(pygame.sprite.Sprite) :
                 elif c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
+
+    def update_health_bar(self, surface):
+        #couleur de la jauge (vert)
+        bar_color = (111, 210, 46)
+        #couleur de l'arriere plan de la jauge
+        back_bar_color = (60,63,60)
+        
+        #definir la position de note jauge de vie
+        #ainsi que sa largeur et son epaisseur 
+        bar_position = [self.rect.x - 15, self.rect.y, self.health ,5]
+        
+        #definir la position de l'arriere plan 
+        #de la jauge de vie
+        back_bar_position = [self.rect.x - 15, self.rect.y, self.max_health ,5]
+
+        #dessiner notre barre de vie
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
+        pygame.draw.rect(surface,bar_color, bar_position)                

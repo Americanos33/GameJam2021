@@ -72,7 +72,7 @@ def redrawWindow():
     game.tt_monsters.draw(win)
     #drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
-
+    game.player.update_health_bar(win)
 
 def main():
     # Game runing variables
@@ -101,7 +101,7 @@ def main():
 
 
             if game.player.rect.y >= 609:
-                game.player.nb_saut =2
+                game.player.nb_saut =2 
                 game.player.rect.y=604
                 
 
@@ -157,6 +157,7 @@ def main():
 
         for monster in game.tt_monsters:
             monster.deplaM()
+            monster.update_health_bar(win)
 
         for plat in level.collisionList :
             plat[0].draw()

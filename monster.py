@@ -5,8 +5,8 @@ class Monster(pygame.sprite.Sprite):
     def __init__(self, game):
         super().__init__()
         self.game = game
-        self.health = 50
-        self.max_health = 50
+        self.health = 100
+        self.max_health = 100
         self.attack = 2
         monst = self.image = pygame.image.load("images/oliveMs.png")
         self.rect = monst.get_rect()
@@ -18,6 +18,34 @@ class Monster(pygame.sprite.Sprite):
         self.rect.y = 608
         self.velocity = 2
 
+    def damage(self, amount):
+        #infliger les degats
+        self.health -= amount
+
+        #verifier si ses pv <= 0
+        if self.health <= 0: 
+            #Supprimer le monstre
+            self.game.tt_monsters.remove(self) #fais gaffe ça supprime tous les monstres 
+                
+    def update_health_bar(self, surface):
+        #couleur de la jauge (vert)
+        bar_color = (111, 210, 46)
+        #couleur de l'arriere plan de la jauge
+        back_bar_color = (60,63,60)
+        
+        #definir la position de note jauge de vie
+        #ainsi que sa largeur et son epaisseur 
+        bar_position = [self.rect.x - 15, self.rect.y, self.health ,5]
+        
+        #definir la position de l'arriere plan 
+        #de la jauge de vie
+        back_bar_position = [self.rect.x - 15, self.rect.y, self.max_health ,5]
+
+        #dessiner notre barre de vie
+        pygame.draw.rect(surface, back_bar_color, back_bar_position)
+        pygame.draw.rect(surface,bar_color, bar_position)
+        
+   
     def deplaM(self):
         if self.rect.x == self.xd:
             self.count *= -1
