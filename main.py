@@ -17,7 +17,9 @@ win = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 
 # Character initialization
-game = Game()
+level = Level.Level(currentLevel)
+level.set_LevelPlatformList()
+game = Game(level)
 
 # Colors
 BLACK = (0, 0, 0)
@@ -78,8 +80,6 @@ def main():
     # Game runing variables
     inGame = False
     inMenu = True
-    level = Level.Level(currentLevel)
-    level.set_LevelPlatformList()
 
     while True:
 
@@ -91,13 +91,9 @@ def main():
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
                     game.player.moveRight(level)
-                    game.player.collisionX(level)
-                    game.player.collisionY(level)    
 
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-                    game.player.moveLeft(level)
-                    game.player.collisionX(level)
-                    game.player.collisionY(level)    
+                    game.player.moveLeft(level)  
 
 
             if game.player.rect.y >= 609:
@@ -130,9 +126,7 @@ def main():
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut()
-            game.player.collisionX(level)
-            game.player.collisionY(level)                
+            game.player.moveSaut()             
 
 
         elif inMenu:
@@ -159,8 +153,11 @@ def main():
             monster.deplaM()
             monster.update_health_bar(win)
 
-        for plat in level.collisionList :
-            plat[0].draw()
+        for plat in level.fruits_list :
+            plat.draw(win)
+
+        for plat in level.wall_list :
+            plat.draw(win)
             
         pygame.display.update()
         pygame.time.delay(2)

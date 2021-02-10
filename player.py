@@ -41,45 +41,50 @@ class Player(pygame.sprite.Sprite) :
     def moveRight(self, level):
 
         #moves the character to the Right and changes the character image accordingly
-        if not self.game.check_collision(self, self.game.tt_monsters):
-            self.rect.x += self.velocity
-            self.image = pygame.image.load("images/personnage1.png").convert_alpha()
-            self.printImage(1)
+        self.rect.x += self.velocity
+        self.printImage(1)
+        self.game.check_collisionFruit(self, self.game.all_fruits)
+        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)) :
+            self.rect.x += -self.velocity
 
     def moveLeft(self, level):
         
         #moves the character to the Left and changes the character image accordingly
-        if not self.game.check_collision(self, self.game.tt_monsters):
-            self.rect.x += -self.velocity
-            self.image = pygame.image.load("images/personnage2.png").convert_alpha()
-            self.printImage(2)
+        self.rect.x += -self.velocity
+        self.printImage(1)
+        self.game.check_collisionFruit(self, self.game.all_fruits)
+        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)):
+            self.rect.x += self.velocity
 
     def printImage(self, nb):
-        self.image = pygame.transform.scale(self.image, (64,64))
-
         if nb == 1:
+            self.image = pygame.image.load("images/personnage1.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image, (64,64))
             self.image.set_colorkey((240,241,241))
         elif nb == 2:
+            self.image = pygame.image.load("images/personnage2.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image, (64,64))
             self.image.set_colorkey((240,240,240))
 
 
     def moveSaut(self):
-        if self.a_sauter and self.nb_saut >= 0:
+        if not self.game.check_collision(self, self.game.all_walls) :
+            if self.a_sauter and self.nb_saut >= 0:
+                
+                if self.saut_monte >= 5:
+                    self.saut_descend -= 1.5
+                    self.saut = self.saut_descend
+                else: 
+                    self.saut_monte += 2
+                    self.saut = self.saut_monte
+                
+                if self.saut_descend < 0:
+                    self.saut_monte = 0
+                    self.saut_descend = 5
+                    self.a_sauter = False
             
-            if self.saut_monte >= 5:
-                self.saut_descend -= 1.5
-                self.saut = self.saut_descend
-            else: 
-                self.saut_monte += 2
-                self.saut = self.saut_monte
-            
-            if self.saut_descend < 0:
-                self.saut_monte = 0
-                self.saut_descend = 5
-                self.a_sauter = False
-        
-        self.rect.y = self.rect.y - (10 * (self.saut/2))  
-
+            self.rect.y = self.rect.y - (10 * (self.saut/2))
+            self.game.check_collisionFruit(self, self.game.all_fruits)
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
@@ -89,59 +94,3 @@ class Player(pygame.sprite.Sprite) :
 
     def lancer_projectile2(self):
         self.tt_projectiles2.add(Projectile(self))
-
-    def collisionX(self, level) :
-        for c in level.collisionList :
-            if c[0].rect.colliderect(self.rect) :
-                if c[1] == '2':
-                    #Contre une banane
-                    level.collisionList.remove(c)
-                elif c[1] == '3' :
-                    #Contre une orange
-                    level.collisionList.remove(c)
-                elif c[1] == '4' :
-                    #Contre une fraise
-                    level.collisionList.remove(c)
-                elif c[1] == '5' :
-                    #Contre une date
-                    level.collisionList.remove(c)
-                elif c[1] == '6' :
-                    #Contre une pastèque
-                    level.collisionList.remove(c)
-
-    def collisionY(self, level) :          
-        for c in level.collisionList :
-            if c[0].rect.colliderect(self.rect) :
-                if c[1] == '2':
-                    #Contre une banane
-                    level.collisionList.remove(c)
-                elif c[1] == '3' :
-                    #Contre une orange
-                    level.collisionList.remove(c)
-                elif c[1] == '4' :
-                    #Contre une fraise
-                    level.collisionList.remove(c)
-                elif c[1] == '5' :
-                    #Contre une date
-                    level.collisionList.remove(c)
-                elif c[1] == '6' :
-                    #Contre une pastèque
-                    level.collisionList.remove(c)
-
-    def update_health_bar(self, surface):
-        #couleur de la jauge (vert)
-        bar_color = (111, 210, 46)
-        #couleur de l'arriere plan de la jauge
-        back_bar_color = (60,63,60)
-        
-        #definir la position de note jauge de vie
-        #ainsi que sa largeur et son epaisseur 
-        bar_position = [self.rect.x - 15, self.rect.y, self.health ,5]
-        
-        #definir la position de l'arriere plan 
-        #de la jauge de vie
-        back_bar_position = [self.rect.x - 15, self.rect.y, self.max_health ,5]
-
-        #dessiner notre barre de vie
-        pygame.draw.rect(surface, back_bar_color, back_bar_position)
-        pygame.draw.rect(surface,bar_color, bar_position)                

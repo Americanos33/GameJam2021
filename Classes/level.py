@@ -14,9 +14,11 @@ class Level :
 
         def __init__(self,levelNumber):
                 
+                self.nblvl = levelNumber
                 self.levelName = 'Levels/level' + str(levelNumber) + '.txt'
                 self.levelList = []
-                self.collisionList = []
+                self.wall_list = pygame.sprite.Group()
+                self.fruits_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -38,17 +40,20 @@ class Level :
                 for j in range(len(self.levelList)):
                     for i in range(len(self.levelList[j])):
                         if self.levelList[j][i] == '1' :
-                            self.collisionList.append((Wall(i,j), '1'))
+                            self.wall_list.add(Wall(i,j))
                         if self.levelList[j][i] == '2' :
-                            self.collisionList.append((Banane(i,j), '2'))
+                            self.fruits_list.add((Banane(i,j)))
                         if self.levelList[j][i] == '3' :
-                            self.collisionList.append((Orange(i,j), '3'))
+                            self.fruits_list.add((Orange(i,j)))
                         if self.levelList[j][i] == '4' :
-                            self.collisionList.append((Fraise(i,j), '4'))
+                            self.fruits_list.add((Fraise(i,j)))
                         if self.levelList[j][i] == '5' :
-                            self.collisionList.append((Date(i,j), '5'))
+                            self.fruits_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
-                            self.collisionList.append((Pasteque(i,j), '6'))
+                            self.fruits_list.add((Pasteque(i,j)))
             
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()
+
+        def getNbLvl(self):
+            return self.nblvl

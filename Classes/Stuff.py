@@ -1,8 +1,6 @@
 import pygame, sys
 from pygame.locals import *
 
-surface = pygame.display.get_surface()
-
 class Stuff :
 
     def __init__(self, X, Y, stuffName) :
