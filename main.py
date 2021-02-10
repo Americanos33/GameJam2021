@@ -87,6 +87,8 @@ def main():
 
             redrawWindow()
 
+            game.player.nb_projectiles += 1
+
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
                 #if (game.player.collisionX(level) or game.player.collisionY(level)):
                     game.player.moveRight()
@@ -97,7 +99,9 @@ def main():
 
 
             if game.player.rect.y >= 609:
+                game.player.nb_saut =2
                 game.player.rect.y=604
+                
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -109,11 +113,18 @@ def main():
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
                         game.player.a_sauter=True
-                        game.player.nb_saut -=1
+                        game.player.nb_saut -= 1
                     if event.key == pygame.K_w:
-                        game.player.lancer_projectile1()
+                        if game.player.nb_projectiles >= 30:
+                            game.player.lancer_projectile1()
+                            game.player.nb_projectiles = 0
                     if event.key == pygame.K_x:
-                        game.player.lancer_projectile2()
+                        if game.player.nb_projectiles >= 30:
+                            game.player.lancer_projectile2()
+                            game.player.nb_projectiles = 0
+                        
+                        
+                        
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 

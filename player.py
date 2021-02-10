@@ -35,6 +35,7 @@ class Player(pygame.sprite.Sprite) :
 
         self.tt_projectiles1 = pygame.sprite.Group()
         self.tt_projectiles2 = pygame.sprite.Group()
+        self.nb_projectiles = 30
 
 
     def moveRight(self):
@@ -63,7 +64,7 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        if self.a_sauter and self.nb_saut > 0:
+        if self.a_sauter and self.nb_saut >= 0:
             
             if self.saut_monte >= 5:
                 self.saut_descend -= 1.5
