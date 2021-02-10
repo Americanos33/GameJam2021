@@ -67,7 +67,8 @@ def drawGrid(w, r, surface):
 def redrawWindow():
     win.blit(levelBackground, (0,0))
     game.player.draw(win)
-    game.player.tt_projectiles.draw(win)
+    game.player.tt_projectiles1.draw(win)
+    game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
     drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
@@ -108,8 +109,10 @@ def main():
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
                         game.player.a_sauter=True
-                    if event.key == pygame.K_SPACE:
-                        game.player.lancer_projectile()
+                    if event.key == pygame.K_w:
+                        game.player.lancer_projectile1()
+                    if event.key == pygame.K_x:
+                        game.player.lancer_projectile2()
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
@@ -132,8 +135,11 @@ def main():
                         inGame = True
             win.blit(menuBackground, (0,0))
         
-        for projectile in game.player.tt_projectiles:
-            projectile.move()
+        for projectile in game.player.tt_projectiles1:
+            projectile.move_g()
+
+        for projectile in game.player.tt_projectiles2:
+            projectile.move_d()
 
         for monster in game.tt_monsters:
             monster.deplaM()

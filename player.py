@@ -30,10 +30,11 @@ class Player(pygame.sprite.Sprite) :
         self.saut = 0
         self.saut_monte = 0
         self.saut_descend = 5
-        self.nb_saut = 0
+        self.nb_saut = 2
         self.a_sauter = False
 
-        self.tt_projectiles = pygame.sprite.Group()
+        self.tt_projectiles1 = pygame.sprite.Group()
+        self.tt_projectiles2 = pygame.sprite.Group()
 
 
     def moveRight(self):
@@ -60,7 +61,7 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        if self.a_sauter :
+        if self.a_sauter and self.nb_saut > 0:
             if self.saut_monte >= 5:
                 self.saut_descend -= 1.5
                 self.saut = self.saut_descend
@@ -72,15 +73,19 @@ class Player(pygame.sprite.Sprite) :
                 self.saut_monte = 0
                 self.saut_descend = 5
                 self.a_sauter = False
-
+                self.nb_saut += 1
+        
         self.rect.y = self.rect.y - (10 * (self.saut/2))  
 
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
 
-    def lancer_projectile(self):
-        self.tt_projectiles.add(Projectile(self))
+    def lancer_projectile1(self):
+        self.tt_projectiles1.add(Projectile(self))
+
+    def lancer_projectile2(self):
+        self.tt_projectiles2.add(Projectile(self))
 
     def collisionX(self, level) :
         

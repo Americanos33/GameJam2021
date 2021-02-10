@@ -15,9 +15,16 @@ class Projectile(pygame.sprite.Sprite):
     def suppr(self):
         self.player.tt_projectiles.remove(self)
 
-    def move(self):
+    def move_d(self):
 
         self.rect.x += self.velocity
         
         if self.rect.x > 1024:
+            self.suppr
+
+    def move_g(self):
+
+        self.rect.x -= self.velocity
+        
+        if self.rect.x < 0:
             self.suppr
