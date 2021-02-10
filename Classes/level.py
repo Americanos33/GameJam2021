@@ -1,55 +1,54 @@
-import position as posi
+import Classes
+from Classes.Wall import Wall
+from Classes.Fruits import Banane
+from Classes.Fruits import Date
+from Classes.Fruits import Fraise
+from Classes.Fruits import Orange
+from Classes.Fruits import Pasteque
+import pygame, sys
+from pygame.locals import *
 
-class Level:
+surface = pygame.display.get_surface
 
-    def __init__(self, nbLvl):
-        self.nbLvl = 1
-        fichier = open("~/Documents/stockPython/data", "r")
-        ligne = fichier.readline()
-        while ligne !=("numero lvl " + nbLvl):
-            ligne = fichier.readline()
-        self.longueur = int(ligne = fichier.readline())
-        self.largeur = int(ligne = fichier.readline())
-        self.departJx = int(ligne = fichier.readline())
-        self.departJy = int(ligne = fichier.readline())
-        posi.Position.__init__(self, self.departJx, self.departJy)
-        self.nbTypeFruit = int(ligne = fichier.readline())
-        j = 0
-        for j in range(0, self.nbTypeFruit):
-            self.nomFruit = fichier.readline()
-            self.posFruitx = int(ligne = fichier.readline())
-            self.posFruity = int(ligne = fichier.readline())
-            posi.Position.__init__(self, self.posFruitx, self.posFruity)
-            self.tableFruits = {}
-            self.tableFruits[str(j)] = posi.Position
+class Level :
 
-        while (fichier.readline() != ""):
-            self.grille = self.grille + "\n" + fichier.readline()
+        def __init__(self,levelNumber):
+                
+                self.levelName = 'Levels/level' + str(levelNumber) + '.txt'
+                self.levelList = []
+                self.collisionList = []
 
+        def readMap(self):
+
+                f = open(self.levelName, 'r')
+
+                g = list(f)
+
+                l = []
+                for s in g :
+                    l +=[list(s)]
+
+                for i in range(len(l)-1) :
+                    l[i].pop()
+                return l
+
+        def createLevelPlatformList(self):
+                self.levelList = self.readMap()
+                
+                for j in range(len(self.levelList)):
+                    for i in range(len(self.levelList[j])):
+                        if self.levelList[j][i] == '1' :
+                            self.collisionList.append((Wall(i,j), '1'))
+                        if self.levelList[j][i] == '2' :
+                            self.collisionList.append((Banane(i,j), '2'))
+                        if self.levelList[j][i] == '3' :
+                            self.collisionList.append((Orange(i,j), '3'))
+                        if self.levelList[j][i] == '4' :
+                            self.collisionList.append((Fraise(i,j), '4'))
+                        if self.levelList[j][i] == '5' :
+                            self.collisionList.append((Date(i,j), '5'))
+                        if self.levelList[j][i] == '6' :
+                            self.collisionList.append((Pasteque(i,j), '6'))
             
-
-    def nextLevel(self):
-        self.nbLvl = self.nbLvl+1
-    
-
-    def initialiseGrille(self):
-        self.grille.initialiseJoueur(self)
-        self.grille.initialiseFruit(self)
-        print(self.grille)
-
-
-    def initialiseFruits(self): 
-        for k in self.tableFruits.items():
-            posi.posFruit = self.tableFruits[k]
-            c = self.longueur * (posi.posFruit.self.posFruitx - 1) + posi.posFruit.self.posFruity
-            caracteres = list(self.grille)
-            caracteres[c] = "O"
-            self.grille = "".join(caracteres)
-
-    def initialiseJoueur(self):
-        c = self.longueur * (self.departJx - 1) + self.departJy
-        caracteres = list(self.grille)
-        caracteres[c] = "X"
-        self.grille = "".join(caracteres)
-        return self.grille
-
+        def set_LevelPlatformList(self):
+                self.createLevelPlatformList()
