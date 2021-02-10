@@ -24,9 +24,9 @@ class Player(pygame.sprite.Sprite) :
         self.image.set_colorkey((240,241,241))
 
         #self.rect = self.image.get_rect()
-        self.rect = Rect(0,0,40,59)
+        self.rect = Rect(0,0,40,64)
         self.rect.x = 0
-        self.rect.y = 608
+        self.rect.y = 6080
         self.win = True
 
         self.saut = 0
@@ -40,7 +40,7 @@ class Player(pygame.sprite.Sprite) :
         self.nb_projectiles = 30
 
 
-    def moveRight(self, level):
+    def moveRight(self):
 
         #moves the character to the Right and changes the character image accordingly
         self.rect.x += self.velocity
@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite) :
         if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)) :
             self.rect.x += -self.velocity
 
-    def moveLeft(self, level):
+    def moveLeft(self):
         
         #moves the character to the Left and changes the character image accordingly
         self.rect.x += -self.velocity
@@ -70,10 +70,6 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        onGround = False
-
-        if self.game.check_collisionWallY(self, self.game.all_walls) :
-            onGround = True
 
         if self.a_sauter and self.nb_saut >= 0:
             
@@ -92,12 +88,14 @@ class Player(pygame.sprite.Sprite) :
         self.rect.y -= (10 * (self.saut/2))
         self.game.check_collisionFruit(self, self.game.all_fruits)
 
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls) or (self.game.check_collisionWallY(self, self.game.all_walls))):
+        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls) or (self.game.check_collisionWallYCiel(self, self.game.all_walls))):
             self.rect.y += (10 * (self.saut/2))
 
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
+        #r = pygame.Surface((self.rect.width, self.rect.height))
+        #surface.blit(r, self.rect)
 
     def lancer_projectile1(self):
         self.tt_projectiles1.add(Projectile(self))
