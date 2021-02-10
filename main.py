@@ -108,6 +108,8 @@ def main():
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
                         game.player.a_sauter=True
+                    if event.key == pygame.K_SPACE:
+                        game.player.lancer_projectile()
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
@@ -129,6 +131,12 @@ def main():
                         inMenu = False
                         inGame = True
             win.blit(menuBackground, (0,0))
+        
+        for projectile in game.player.tt_projectiles:
+            projectile.move()
+
+        for monster in game.tt_monsters:
+            monster.deplaM()
 
         for plat in level.collisionList :
             plat[0].draw()
