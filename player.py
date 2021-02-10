@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite) :
         self.health = 100
         self.max_health = 100
         self.attack = 10
-        self.velocity = 2
+        self.velocity = 3
         
         self.dx = 0
         self.dy = 0
@@ -77,7 +77,6 @@ class Player(pygame.sprite.Sprite) :
                 self.saut_monte = 0
                 self.saut_descend = 5
                 self.a_sauter = False
-                self.nb_saut += 1
         
         self.rect.y = self.rect.y - (10 * (self.saut/2))  
 

@@ -10,7 +10,7 @@ class Monster(pygame.sprite.Sprite):
         self.attack = 2
         monst = self.image = pygame.image.load("images/oliveMs.png")
         self.rect = monst.get_rect()
-        self.rect.x = 980
+        self.rect.x = 780
         #bordure de deplacement des monstres
         self.xg = (self.rect.x)-100
         self.xd = self.rect.x

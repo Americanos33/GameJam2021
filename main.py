@@ -130,7 +130,7 @@ def main():
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut(level)
+            game.player.moveSaut()
             game.player.collisionX(level)
             game.player.collisionY(level)                
 

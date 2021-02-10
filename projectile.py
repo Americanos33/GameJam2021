@@ -25,7 +25,9 @@ class Projectile(pygame.sprite.Sprite):
         
         if self.rect.x > 1022 :
             self.suppr()
-            
+
+        if self.player.game.check_collision(self, self.player.game.tt_monsters):
+            self.suppr()  
 
     def move_g(self):
 
@@ -33,4 +35,5 @@ class Projectile(pygame.sprite.Sprite):
 
         if self.rect.x < 0 :
             self.suppr()
-            
+        if self.player.game.check_collision(self, self.player.game.tt_monsters):
+            self.suppr()      
