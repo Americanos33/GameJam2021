@@ -69,12 +69,6 @@ def redrawWindow():
     game.player.draw(win)
     game.player.tt_projectiles.draw(win)
     game.tt_monsters.draw(win)
-    win.blit(banane, (128, 576))
-    win.blit(orange, (288, 576))
-    win.blit(date, (448, 576))
-    win.blit(fraise, (578, 576))
-    win.blit(pasteque, (736, 576))
-    win.blit(wall, (800, 576))
     drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
 

@@ -14,14 +14,10 @@ class Player(pygame.sprite.Sprite) :
         self.health = 100
         self.max_health = 100
         self.attack = 10
-<<<<<<< HEAD
-        self.velocity = 3
-=======
         self.velocity = 2
         
         self.dx = 0
         self.dy = 0
->>>>>>> 6503628d3cdf284ef2601d5a46dd2b51dac04d18
 
         self.image = pygame.image.load("images/personnage1.png").convert_alpha()
         self.printImage(1)
@@ -37,12 +33,9 @@ class Player(pygame.sprite.Sprite) :
         self.nb_saut = 0
         self.a_sauter = False
 
-<<<<<<< HEAD
         self.tt_projectiles = pygame.sprite.Group()
 
 
-=======
->>>>>>> 6503628d3cdf284ef2601d5a46dd2b51dac04d18
     def moveRight(self):
 
         #moves the character to the Right and changes the character image accordingly
