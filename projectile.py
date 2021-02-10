@@ -16,8 +16,9 @@ class Projectile(pygame.sprite.Sprite):
         self.player.tt_projectiles.remove(self)
 
     def move_d(self):
-
+        
         self.rect.x += self.velocity
+        self.image = pygame.image.load("images/fourchettR.png")
         
         if self.rect.x > 1024:
             self.suppr

@@ -63,7 +63,7 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        if self.a_sauter :
+        if self.a_sauter and self.nb_saut > 0:
             
             if self.saut_monte >= 5:
                 self.saut_descend -= 1.5
@@ -76,7 +76,7 @@ class Player(pygame.sprite.Sprite) :
                 self.saut_monte = 0
                 self.saut_descend = 5
                 self.a_sauter = False
-                self.nb_saut += 1
+                
         
         self.rect.y = self.rect.y - (10 * (self.saut/2))  
 
