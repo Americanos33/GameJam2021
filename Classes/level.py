@@ -14,9 +14,11 @@ class Level :
 
         def __init__(self,levelNumber):
                 
+                self.nblvl = levelNumber
                 self.levelName = 'Levels/level' + str(levelNumber) + '.txt'
                 self.levelList = []
-                self.collisionList = pygame.sprite.Group()
+                self.wall_list = pygame.sprite.Group()
+                self.fruits_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -38,17 +40,20 @@ class Level :
                 for j in range(len(self.levelList)):
                     for i in range(len(self.levelList[j])):
                         if self.levelList[j][i] == '1' :
-                            self.collisionList.add(Wall(i,j))
+                            self.wall_list.add(Wall(i,j))
                         if self.levelList[j][i] == '2' :
-                            self.collisionList.add((Banane(i,j)))
+                            self.fruits_list.add((Banane(i,j)))
                         if self.levelList[j][i] == '3' :
-                            self.collisionList.add((Orange(i,j)))
+                            self.fruits_list.add((Orange(i,j)))
                         if self.levelList[j][i] == '4' :
-                            self.collisionList.add((Fraise(i,j)))
+                            self.fruits_list.add((Fraise(i,j)))
                         if self.levelList[j][i] == '5' :
-                            self.collisionList.add((Date(i,j)))
+                            self.fruits_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
-                            self.collisionList.add((Pasteque(i,j)))
+                            self.fruits_list.add((Pasteque(i,j)))
             
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()
+
+        def getNbLvl(self):
+            return self.nblvl
