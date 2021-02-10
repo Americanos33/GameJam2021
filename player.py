@@ -2,7 +2,7 @@ import pygame
 import time
 from pygame.locals import *
 import Classes
-from Classes.level import Level
+from Classes.Level import Level
 
 
 class Player(pygame.sprite.Sprite) :

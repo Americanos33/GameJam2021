@@ -81,6 +81,8 @@ def main():
     # Game runing variables
     inGame = False
     inMenu = True
+    level = Level.Level(currentLevel)
+    level.set_LevelPlatformList()
 
     while True:
 
@@ -90,8 +92,12 @@ def main():
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
                 game.player.moveRight()
+                game.player.collisionX(level)
+                game.player.collisionY(level)
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
                 game.player.moveLeft()
+                game.player.collisionX(level)
+                game.player.collisionY(level)
 
             if game.player.rect.y >= 609:
                 game.player.rect.y=604
@@ -110,6 +116,8 @@ def main():
                     game.pressed[event.key] = False
 
             game.player.moveSaut()
+            game.player.collisionX(level)
+            game.player.collisionY(level)
 
 
         elif inMenu:
@@ -125,9 +133,6 @@ def main():
                         inMenu = False
                         inGame = True
             win.blit(menuBackground, (0,0))
-
-        level = Level.Level(currentLevel)
-        level.createLevelPlatformList()
 
         for plat in level.collisionList :
             plat[0].draw()
