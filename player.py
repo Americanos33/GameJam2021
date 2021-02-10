@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite) :
         self.image.set_colorkey((240,241,241))
 
         #self.rect = self.image.get_rect()
-        self.rect = Rect(0,0,45,59)
+        self.rect = Rect(0,0,40,59)
         self.rect.x = 0
         self.rect.y = 608
         self.win = True
@@ -46,7 +46,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.x += self.velocity
         self.printImage(1)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)) :
+        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)) :
             self.rect.x += -self.velocity
 
     def moveLeft(self, level):
@@ -55,7 +55,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.x += -self.velocity
         self.printImage(2)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)):
+        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)):
             self.rect.x += self.velocity
 
     def printImage(self, nb):
