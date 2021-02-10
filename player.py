@@ -41,23 +41,17 @@ class Player(pygame.sprite.Sprite) :
 
         #moves the character to the Right and changes the character image accordingly
         
-        for c in level.collisionList :
-            if c[0].rect.colliderect(self.rect) :
-                if c[1] != '1':
-                    self.rect.x += self.velocity
-                    self.image = pygame.image.load("images/personnage1.png").convert_alpha()
-                    self.printImage(1)
+        self.rect.x += self.velocity
+        self.image = pygame.image.load("images/personnage1.png").convert_alpha()
+        self.printImage(1)
 
     def moveLeft(self, level):
         
         #moves the character to the Left and changes the character image accordingly
         
-        for c in level.collisionList :
-            if c[0].rect.colliderect(self.rect) :
-                if c[1] != '1':
-                    self.rect.x += -self.velocity
-                    self.image = pygame.image.load("images/personnage2.png").convert_alpha()
-                    self.printImage(2)
+        self.rect.x += -self.velocity
+        self.image = pygame.image.load("images/personnage2.png").convert_alpha()
+        self.printImage(2)
 
     def printImage(self, nb):
         self.image = pygame.transform.scale(self.image, (64,64))
@@ -69,26 +63,23 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self, level):
-        for c in level.collisionList :
-            if c[0].rect.colliderect(self.rect) :
-                if c[1] != '1':
-                    print("test")
-                    if self.a_sauter :
-                        
-                        if self.saut_monte >= 5:
-                            self.saut_descend -= 1.5
-                            self.saut = self.saut_descend
-                        else: 
-                            self.saut_monte += 2
-                            self.saut = self.saut_monte
-                        
-                        if self.saut_descend < 0:
-                            self.saut_monte = 0
-                            self.saut_descend = 5
-                            self.a_sauter = False
-                            self.nb_saut += 1
-                    
-                    self.rect.y = self.rect.y - (10 * (self.saut/2))  
+
+        if self.a_sauter :
+            
+            if self.saut_monte >= 5:
+                self.saut_descend -= 1.5
+                self.saut = self.saut_descend
+            else: 
+                self.saut_monte += 2
+                self.saut = self.saut_monte
+            
+            if self.saut_descend < 0:
+                self.saut_monte = 0
+                self.saut_descend = 5
+                self.a_sauter = False
+                self.nb_saut += 1
+        
+        self.rect.y = self.rect.y - (10 * (self.saut/2))  
 
 
     def draw(self, surface) :
