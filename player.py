@@ -8,13 +8,13 @@ from Classes.Level import Level
 
 class Player(pygame.sprite.Sprite) :
 
-    def __init__(self):
+    def __init__(self, game):
         super().__init__()
-
+        self.game = game
         self.health = 100
         self.max_health = 100
         self.attack = 10
-        self.velocity = 2
+        self.velocity = 3
         
         self.dx = 0
         self.dy = 0
@@ -35,23 +35,24 @@ class Player(pygame.sprite.Sprite) :
 
         self.tt_projectiles1 = pygame.sprite.Group()
         self.tt_projectiles2 = pygame.sprite.Group()
+        self.nb_projectiles = 30
 
 
     def moveRight(self, level):
 
         #moves the character to the Right and changes the character image accordingly
-        
-        self.rect.x += self.velocity
-        self.image = pygame.image.load("images/personnage1.png").convert_alpha()
-        self.printImage(1)
+        if not self.game.check_collision(self, self.game.tt_monsters):
+            self.rect.x += self.velocity
+            self.image = pygame.image.load("images/personnage1.png").convert_alpha()
+            self.printImage(1)
 
     def moveLeft(self, level):
         
         #moves the character to the Left and changes the character image accordingly
-        
-        self.rect.x += -self.velocity
-        self.image = pygame.image.load("images/personnage2.png").convert_alpha()
-        self.printImage(2)
+        if not self.game.check_collision(self, self.game.tt_monsters):
+            self.rect.x += -self.velocity
+            self.image = pygame.image.load("images/personnage2.png").convert_alpha()
+            self.printImage(2)
 
     def printImage(self, nb):
         self.image = pygame.transform.scale(self.image, (64,64))
@@ -62,9 +63,8 @@ class Player(pygame.sprite.Sprite) :
             self.image.set_colorkey((240,240,240))
 
 
-    def moveSaut(self, level):
-
-        if self.a_sauter :
+    def moveSaut(self):
+        if self.a_sauter and self.nb_saut >= 0:
             
             if self.saut_monte >= 5:
                 self.saut_descend -= 1.5
@@ -77,7 +77,6 @@ class Player(pygame.sprite.Sprite) :
                 self.saut_monte = 0
                 self.saut_descend = 5
                 self.a_sauter = False
-                self.nb_saut += 1
         
         self.rect.y = self.rect.y - (10 * (self.saut/2))  
 

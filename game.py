@@ -7,7 +7,9 @@ from pygame.locals import *
 class Game :
 
     def __init__(self):
-        self.player = Player()
+        self.tt_players = pygame.sprite.Group()
+        self.player = Player(self)
+        self.tt_players.add(self.player)
         self.tt_monsters = pygame.sprite.Group()
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
@@ -18,6 +20,6 @@ class Game :
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
     def spawn_monster(self):
-        monster=Monster()
+        monster=Monster(self)
         self.tt_monsters.add(monster)
         

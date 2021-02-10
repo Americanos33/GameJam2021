@@ -11,21 +11,29 @@ class Projectile(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         self.rect.x = player.rect.x 
         self.rect.y = player.rect.y + 5
+        
 
     def suppr(self):
-        self.player.tt_projectiles.remove(self)
+        self.player.tt_projectiles1.remove(self)
+        self.player.tt_projectiles2.remove(self)
+        
 
     def move_d(self):
         
         self.rect.x += self.velocity
         self.image = pygame.image.load("images/fourchettR.png")
         
-        if self.rect.x > 1024:
-            self.suppr
+        if self.rect.x > 1022 :
+            self.suppr()
+
+        if self.player.game.check_collision(self, self.player.game.tt_monsters):
+            self.suppr()  
 
     def move_g(self):
 
         self.rect.x -= self.velocity
-        
-        if self.rect.x < 0:
-            self.suppr
+
+        if self.rect.x < 0 :
+            self.suppr()
+        if self.player.game.check_collision(self, self.player.game.tt_monsters):
+            self.suppr()      
