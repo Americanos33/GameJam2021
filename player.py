@@ -68,23 +68,27 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
-        if not self.game.check_collision(self, self.game.all_walls) :
-            if self.a_sauter and self.nb_saut >= 0:
-                
-                if self.saut_monte >= 5:
-                    self.saut_descend -= 1.5
-                    self.saut = self.saut_descend
-                else: 
-                    self.saut_monte += 2
-                    self.saut = self.saut_monte
-                
-                if self.saut_descend < 0:
-                    self.saut_monte = 0
-                    self.saut_descend = 5
-                    self.a_sauter = False
+
+        if self.a_sauter and self.nb_saut >= 0:
             
-            self.rect.y = self.rect.y - (10 * (self.saut/2))
-            self.game.check_collisionFruit(self, self.game.all_fruits)
+            if self.saut_monte >= 5:
+                self.saut_descend -= 1.5
+                self.saut = self.saut_descend
+            else: 
+                self.saut_monte += 2
+                self.saut = self.saut_monte
+            
+            if self.saut_descend < 0:
+                self.saut_monte = 0
+                self.saut_descend = 5
+                self.a_sauter = False
+        
+        self.rect.y -= (10 * (self.saut/2))
+        self.game.check_collisionFruit(self, self.game.all_fruits)
+
+        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)):
+            self.rect.y += (10 * (self.saut/2))
+
 
     def draw(self, surface) :
         surface.blit(self.image, self.rect)
