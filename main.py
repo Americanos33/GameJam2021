@@ -69,7 +69,7 @@ def redrawWindow():
     game.player.draw(win)
     game.player.tt_projectiles.draw(win)
     game.tt_monsters.draw(win)
-    drawGrid(width, rows, win)
+    #drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
 
 
