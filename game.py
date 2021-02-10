@@ -23,7 +23,10 @@ class Game :
         self.spawn_fruits()
 
     def check_collision(self, sprite, group):
-        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+        for i in group:
+            if i.rect.colliderect(sprite.rect):
+                return True
+        return False
 
     def check_collisionFruit(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
