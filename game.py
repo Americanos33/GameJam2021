@@ -31,6 +31,9 @@ class Game :
     def check_collisionFruit(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
 
+    def check_collisionMonstre(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
     def spawn_monster(self):
         monster=Monster(self)
         self.tt_monsters.add(monster)

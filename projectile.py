@@ -26,7 +26,7 @@ class Projectile(pygame.sprite.Sprite):
         if self.rect.x > 1022 :
             self.suppr()
 
-        for monster in self.player.game.check_collision(self, self.player.game.tt_monsters):
+        for monster in self.player.game.check_collisionMonstre(self, self.player.game.tt_monsters):
             self.suppr()  
             #infliger des dégats
             monster.damage(self.player.attack)
@@ -37,6 +37,6 @@ class Projectile(pygame.sprite.Sprite):
 
         if self.rect.x < 0 :
             self.suppr()
-        for monster in self.player.game.check_collision(self, self.player.game.tt_monsters):
+        for monster in self.player.game.check_collisionMonstre(self, self.player.game.tt_monsters):
             self.suppr()    
             monster.damage(self.player.attack)  
