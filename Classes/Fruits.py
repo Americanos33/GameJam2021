@@ -1,31 +1,32 @@
-import Stuff
+import Classes
+from Classes.Stuff import Stuff
 
-class Fruits(Stuff, surface, name) :
+class Fruits(Stuff) :
 
-    def __init__(self, X, Y, surface) :
-        Stuff.__init__(self, X, Y, name, surface)
+    def __init__(self, X, Y, name) :
+        Stuff.__init__(self, X, Y, name)
 
-class Banane(Fruits, surface) :
+class Banane(Fruits) :
 
-    def __init__(self, X, Y, surface) :
-        Fruits.__init__(self, surface, "banane")
+    def __init__(self, X, Y) :
+        Fruits.__init__(self, X, Y, "banane")
 
-class Orange() :
+class Orange(Fruits) :
 
-    def __init__(self, X, Y, surface) :
-        Fruits.__init__(self, surface, "orange")
+    def __init__(self, X, Y) :
+        Fruits.__init__(self, X, Y, "orange")
 
-class Fraise() :
+class Fraise(Fruits) :
 
-    def __init__(self, X, Y, surface) :
-        Fruits.__init__(self, surface, "fraise")
+    def __init__(self, X, Y) :
+        Fruits.__init__(self, X, Y, "fraise")
 
-class Date() :
+class Date(Fruits) :
 
-    def __init__(self, X, Y, surface) :
-        Fruits.__init__(self, surface, "date")
+    def __init__(self, X, Y) :
+        Fruits.__init__(self, X, Y, "date")
 
-class Pasteque() :
+class Pasteque(Fruits) :
 
-    def __init__(self, X, Y, surface) :
-        Fruits.__init__(self, surface, "pasteque")
+    def __init__(self, X, Y) :
+        Fruits.__init__(self, X, Y, "pasteque")

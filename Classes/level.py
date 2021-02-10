@@ -1,5 +1,10 @@
 import Classes
 from Classes.Wall import Wall
+from Classes.Fruits import Banane
+from Classes.Fruits import Date
+from Classes.Fruits import Fraise
+from Classes.Fruits import Orange
+from Classes.Fruits import Pasteque
 import pygame, sys
 from pygame.locals import *
 

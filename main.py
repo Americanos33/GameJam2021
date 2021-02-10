@@ -75,7 +75,6 @@ def redrawWindow():
     win.blit(wall, (800, 576))
     drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
-    pygame.display.update()
 
 
 def main():
