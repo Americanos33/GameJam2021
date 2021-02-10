@@ -8,9 +8,9 @@ from Classes.Level import Level
 
 class Player(pygame.sprite.Sprite) :
 
-    def __init__(self):
+    def __init__(self, game):
         super().__init__()
-
+        self.game = game
         self.health = 100
         self.max_health = 100
         self.attack = 10
@@ -40,18 +40,18 @@ class Player(pygame.sprite.Sprite) :
     def moveRight(self, level):
 
         #moves the character to the Right and changes the character image accordingly
-        
-        self.rect.x += self.velocity
-        self.image = pygame.image.load("images/personnage1.png").convert_alpha()
-        self.printImage(1)
+        if not self.game.check_collision(self, self.game.tt_monsters):
+            self.rect.x += self.velocity
+            self.image = pygame.image.load("images/personnage1.png").convert_alpha()
+            self.printImage(1)
 
     def moveLeft(self, level):
         
         #moves the character to the Left and changes the character image accordingly
-        
-        self.rect.x += -self.velocity
-        self.image = pygame.image.load("images/personnage2.png").convert_alpha()
-        self.printImage(2)
+        if not self.game.check_collision(self, self.game.tt_monsters):
+            self.rect.x += -self.velocity
+            self.image = pygame.image.load("images/personnage2.png").convert_alpha()
+            self.printImage(2)
 
     def printImage(self, nb):
         self.image = pygame.transform.scale(self.image, (64,64))
