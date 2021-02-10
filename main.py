@@ -88,11 +88,11 @@ def main():
             redrawWindow()
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
-                if (game.player.collisionX(level) or game.player.collisionY(level)):
+                #if (game.player.collisionX(level) or game.player.collisionY(level)):
                     game.player.moveRight()
 
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-                if (game.player.collisionX(level) or game.player.collisionY(level)):
+                #if (game.player.collisionX(level) or game.player.collisionY(level)):
                     game.player.moveLeft()
 
 
@@ -116,8 +116,9 @@ def main():
                         game.player.lancer_projectile2()
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
-            if (game.player.collisionX(level) or game.player.collisionY(level)):
-                game.player.moveSaut()
+
+            #if (game.player.collisionX(level) or game.player.collisionY(level)):
+            game.player.moveSaut()
                 
 
 

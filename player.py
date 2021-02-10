@@ -102,23 +102,23 @@ class Player(pygame.sprite.Sprite) :
                     elif self.dx < 0 :
                         self.rect.left = c[0].rect.right
                         return False
-                if c[1] == '2':
+                elif c[1] == '2':
                     #Contre une banane
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '3' :
+                elif c[1] == '3' :
                     #Contre une orange
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '4' :
+                elif c[1] == '4' :
                     #Contre une fraise
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '5' :
+                elif c[1] == '5' :
                     #Contre une date
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '6' :
+                elif c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
                     return True
@@ -134,26 +134,29 @@ class Player(pygame.sprite.Sprite) :
                         self.rect.bottom = c[0].rect.top 
                         self.dy = 0
                         return False
-                    if self.dy < 0 :
+                    elif self.dy < 0 :
                         self.rect.top = c[0].rect.bottom
                         self.dy = 0
                         return False
-                if c[1] == '2':
+                elif c[1] == '2':
                     #Contre une banane
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '3' :
+                elif c[1] == '3' :
                     #Contre une orange
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '4' :
+                elif c[1] == '4' :
                     #Contre une fraise
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '5' :
+                elif c[1] == '5' :
                     #Contre une date
                     level.collisionList.remove(c)
                     return True
-                if c[1] == '6' :
+                elif c[1] == '6' :
                     #Contre une pastèque
                     level.collisionList.remove(c)
+                    return True
+                else :
+                    return True
