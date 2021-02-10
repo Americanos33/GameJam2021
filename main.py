@@ -148,7 +148,7 @@ def main():
             monster.deplaM()
 
         for plat in level.collisionList :
-            plat[0].draw()
+            plat.draw(win)
             
         pygame.display.update()
         pygame.time.delay(2)

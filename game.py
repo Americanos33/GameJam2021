@@ -9,6 +9,8 @@ class Game :
     def __init__(self):
         self.player = Player()
         self.tt_monsters = pygame.sprite.Group()
+        self.all_fruits = pygame.sprite.Group()
+        self.all_walls = pygame.sprite.Group()
         self.pressed = {}
         self.spawn_monster()
 
