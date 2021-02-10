@@ -20,9 +20,11 @@ class Player(pygame.sprite.Sprite) :
         self.dy = 0
 
         self.image = pygame.image.load("images/personnage1.png").convert_alpha()
-        self.printImage(1)
+        self.image = pygame.transform.scale(self.image, (64,64))
+        self.image.set_colorkey((240,241,241))
 
-        self.rect = self.image.get_rect()
+        #self.rect = self.image.get_rect()
+        self.rect = Rect(0,0,45,59)
         self.rect.x = 0
         self.rect.y = 608
         self.win = True
@@ -51,7 +53,7 @@ class Player(pygame.sprite.Sprite) :
         
         #moves the character to the Left and changes the character image accordingly
         self.rect.x += -self.velocity
-        self.printImage(1)
+        self.printImage(2)
         self.game.check_collisionFruit(self, self.game.all_fruits)
         if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)):
             self.rect.x += self.velocity
@@ -68,6 +70,10 @@ class Player(pygame.sprite.Sprite) :
 
 
     def moveSaut(self):
+        onGround = False
+
+        if self.game.check_collisionWallY(self, self.game.all_walls) :
+            onGround = True
 
         if self.a_sauter and self.nb_saut >= 0:
             
@@ -86,7 +92,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.y -= (10 * (self.saut/2))
         self.game.check_collisionFruit(self, self.game.all_fruits)
 
-        if (self.game.check_collision(self, self.game.tt_monsters)) or (self.game.check_collision(self, self.game.all_walls)):
+        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls) or (self.game.check_collisionWallY(self, self.game.all_walls))):
             self.rect.y += (10 * (self.saut/2))
 
 

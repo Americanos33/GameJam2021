@@ -22,9 +22,15 @@ class Game :
         self.spawn_wall()
         self.spawn_fruits()
 
-    def check_collision(self, sprite, group):
+    def check_collisionWallX(self, sprite, group):
         for i in group:
             if i.rect.colliderect(sprite.rect):
+                return True
+        return False
+
+    def check_collisionWallY(self, sprite, group):
+        for i in group:
+            if i.rect.top == sprite.rect.bottom:
                 return True
         return False
 

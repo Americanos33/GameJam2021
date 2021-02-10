@@ -12,8 +12,8 @@ class Fruits(pygame.sprite.Sprite) :
         self.image = pygame.image.load("images/" + self.name + ".png")
         self.image = pygame.transform.smoothscale(self.image, (32,32))
         self.rect = self.image.get_rect()
-        self.rect.left = 20*(self.X) 
-        self.rect.bottom = 20*(self.Y+1)
+        self.rect.left = 19*(self.X) 
+        self.rect.bottom = 19*(self.Y+1)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
