@@ -111,6 +111,7 @@ def main():
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
                         game.player.a_sauter=True
+                        game.player.nb_saut -=1
                     if event.key == pygame.K_w:
                         game.player.lancer_projectile1()
                     if event.key == pygame.K_x:
