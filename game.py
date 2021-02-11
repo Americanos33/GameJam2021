@@ -34,9 +34,10 @@ class Game :
     def check_collisionWallX(self, sprite, group):
         #r = pygame.Rect(sprite.rect.width, sprite.rect.height)
         for i in group:
-            if (i.rect.top == sprite.rect.bottom):
-                
-                return True
+            if (i.rect.top == sprite.rect.bottom):                
+               return True
+            else :
+                return self.check_allCollisions(sprite, group)
         return False
 
     def check_collisionWallYGround(self, sprite, group):
@@ -51,7 +52,8 @@ class Game :
                 return True
         return True
 
-    
+    def check_allCollisions(self, sprite, group):
+        return pygame.sprite.spritecollideany(sprite, group)
 
     def check_collisionFruit(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)

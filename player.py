@@ -33,7 +33,6 @@ class Player(pygame.sprite.Sprite) :
 
         self.saut = 0
         self.saut_monte = 0
-        self.saut_descend = 5
         self.nb_saut = 2
         self.a_sauter = False
 
@@ -46,32 +45,29 @@ class Player(pygame.sprite.Sprite) :
             self.health -=amount
 
     def gravite(self):
-        if  not pygame.sprite.spritecollideany(self, self.game.all_walls):
-            self.rect.y += 1
+        if  not pygame.sprite.spritecollideany(self, self.game.all_walls) :
+                self.rect.y += 5
         else : 
-            self.nb_saut = 3
+            self.nb_saut = 2
 
     def moveRight(self):
 
-        
         #moves the character to the Right and changes the character image accordingly
         self.rect.x += self.velocity
         self.printImage(1)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        
-            
-
-      
-        
+        if self.game.check_collisionWallX(self, self.game.all_walls):
+            self.rect.x -= self.velocity
 
     def moveLeft(self):
         
         #moves the character to the Left and changes the character image accordingly
-        self.rect.x += -self.velocity
+        self.rect.x -= self.velocity
         self.printImage(2)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)):
+        if self.game.check_collisionWallX(self, self.game.all_walls):
             self.rect.x += self.velocity
+            
 
     def printImage(self, nb):
         if nb == 1:
@@ -86,18 +82,21 @@ class Player(pygame.sprite.Sprite) :
 
     def moveSaut(self):
 
-        if self.a_sauter and self.nb_saut > 0:
+        if self.a_sauter and self.nb_saut >= 0:
             
-            if self.saut_monte >= 5:
+            if self.saut_monte >= 10:
                 self.saut_monte = 0
                 self.saut = 0
                 self.a_sauter = False
             else: 
-                self.saut_monte += 1
+                self.saut_monte += 2
                 self.saut = self.saut_monte
-            
         
         self.rect.y -= (10 * (self.saut/2))
+
+        if self.game.check_allCollisions(self, self.game.all_walls):
+            self.rect.y += (10 * (self.saut/2))
+
         self.game.check_collisionFruit(self, self.game.all_fruits)
 
         
