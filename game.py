@@ -4,7 +4,7 @@ from monster import Monster
 from pygame.locals import *
 import Classes.Level
 from Classes.Level import Level
-
+import random
 
 class Game :
 
@@ -21,7 +21,12 @@ class Game :
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
         self.all_decors = pygame.sprite.Group()
+        self.score = random.randint(0,1736)
         self.pressed = {}
+
+        self.level = level
+        self.font = pygame.font.SysFont("monospace", 16)
+        self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
 
         if self.level.nblvl == 1:
             self.spawn_monster()

@@ -4,6 +4,7 @@ from game import Game
 import time
 import pygame, sys
 from pygame.locals import *
+import random
 
 # Variables
 width = 1024
@@ -64,6 +65,7 @@ menuBackground = pygame.transform.scale(menuBackground, (width, height))
 gameOver = pygame.image.load('images/Game_Over.png')
 gameOver= pygame.transform.scale(gameOver, (width,height))
 
+
 def drawGrid(w, r, surface):
     sizeBtwn = w // r
  
@@ -93,6 +95,7 @@ def redrawWindow(lvl,level,game):
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
+    
 
     for decor in level.decor_simple_list :
         decor.draw(win)
@@ -129,6 +132,7 @@ def main():
     finMenu = False
     game_Over = game.game_over 
     est_vivant = game.player.health >= 1
+    
     
     while running:
         
@@ -218,6 +222,8 @@ def main():
                         inGame = False
             win.fill((0,0,0))
             win.blit(gameOver, (0,0))
+            win.blit(game.score_text, (20,20))
+            
             
 
         
