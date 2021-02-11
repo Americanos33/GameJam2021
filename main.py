@@ -8,7 +8,7 @@ from pygame.locals import *
 width = 1024
 height = 768
 rows = 32
-currentLevel = 2
+currentLevel = 0
 
 # Pygame initialization
 pygame.init()
@@ -83,7 +83,10 @@ def redrawWindow():
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
 
-    for decor in level.decor_list :
+    for decor in level.decor_simple_list :
+        decor.draw(win)
+
+    for decor in level.decor_collision_list :
         decor.draw(win)
 
     for projectile in game.player.tt_projectiles1:

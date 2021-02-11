@@ -12,8 +12,8 @@ class Game :
         self.is_playing = False
         self.menu = True
         self.game_over = False 
-        #self.est_vivant = player.health <= 1 
         self.tt_players = pygame.sprite.Group()
+        self.level = level
         self.player = Player(self)
         self.tt_players.add(self.player)
 
@@ -21,8 +21,6 @@ class Game :
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
         self.pressed = {}
-
-        self.level = level
 
         if self.level.nblvl == 1:
             self.spawn_monster()

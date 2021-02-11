@@ -21,7 +21,8 @@ class Level :
                 
                 self.wall_list = pygame.sprite.Group()
                 self.fruits_list = pygame.sprite.Group()
-                self.decor_list = pygame.sprite.Group()
+                self.decor_collision_list = pygame.sprite.Group()
+                self.decor_simple_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -55,11 +56,11 @@ class Level :
                         if self.levelList[j][i] == '6' :
                             self.fruits_list.add((Pasteque(i,j)))
                         if self.levelList[j][i] == '7' :
-                            self.decor_list.add((Decor(i,j, "tree")))
+                            self.decor_simple_list.add((Decor(i,j, "tree")))
                         if self.levelList[j][i] == '8' :
-                            self.decor_list.add((Decor(i,j, "bed")))                        
+                            self.decor_collision_list.add((Decor(i,j, "bed")))                        
                         if self.levelList[j][i] == '9' :
-                            self.decor_list.add((Decor(i,j, "porte")))
+                            self.decor_collision_list.add((Decor(i,j, "porte")))
 
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()

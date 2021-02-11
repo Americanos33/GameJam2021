@@ -27,6 +27,20 @@ class Player(pygame.sprite.Sprite) :
         self.rect = Rect(0,0,40,64)
         self.rect.x = 0
         self.rect.y = 0
+
+        if Level.getNbLvl(self.game.level) == 0 :
+            self.rect.x = 0
+            self.rect.y = 500
+        elif Level.getNbLvl(self.game.level) == 1:
+            self.rect.x = 0
+            self.rect.y = 0
+        elif Level.getNbLvl(self.game.level) == 2:
+            self.rect.x = 0
+            self.rect.y = 0
+        elif Level.getNbLvl(self.game.level) == 3:
+            self.rect.x = 0
+            self.rect.y = 0
+
         self.win = True
 
         self.rect2 = Rect(0,0,40,63)
