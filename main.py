@@ -120,7 +120,7 @@ def redrawWindow(lvl,level,game):
         plat.draw(win)
 
     game.player.draw(win)
-
+    #win.blit(game.score_text, (20,20))
 
 def main():
     # Game runing variables
@@ -176,7 +176,7 @@ def main():
                     game.pressed[event.key] = False
 
             game.player.moveSaut()
-            win.blit(game.score_text, (20,20))          
+            #win.blit(game.score_text, (20,20))          
 
             if game.check_collisionMonstre(game.player, game.all_decors):
                 lvle += 1
