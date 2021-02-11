@@ -22,7 +22,6 @@ class Game :
         self.all_walls = pygame.sprite.Group()
         self.score = 0
         self.all_decors = pygame.sprite.Group()
-        self.score = random.randint(0,1736)
         self.pressed = {}
 
         self.level = level
