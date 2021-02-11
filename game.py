@@ -20,14 +20,20 @@ class Game :
         self.tt_monsters = pygame.sprite.Group()
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
-        self.score = 0
+        self.score = random.randint(129,1873)
         self.all_decors = pygame.sprite.Group()
         self.pressed = {}
 
         self.level = level
+<<<<<<< HEAD
 
         self.nb_monstres = 0
 
+=======
+        self.font = pygame.font.SysFont("monospace", 16)
+        self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
+        
+>>>>>>> 537f21b06930789a811072396cf05c85e36e6495
         if self.level.nblvl == 1:
             self.nb_monstres = 3
             self.spawn_monster()
