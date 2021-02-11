@@ -5,6 +5,7 @@ from Classes.Fruits import Date
 from Classes.Fruits import Fraise
 from Classes.Fruits import Orange
 from Classes.Fruits import Pasteque
+from Classes.Decor import Decor
 import pygame, sys
 from pygame.locals import *
 
@@ -20,6 +21,8 @@ class Level :
                 
                 self.wall_list = pygame.sprite.Group()
                 self.fruits_list = pygame.sprite.Group()
+                self.decor_collision_list = pygame.sprite.Group()
+                self.decor_simple_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -52,9 +55,13 @@ class Level :
                             self.fruits_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
                             self.fruits_list.add((Pasteque(i,j)))
-                        if self.levelList[j][i] == 'b' :
-                            self.decor_list.add((Decor(i,j)))
-            
+                        if self.levelList[j][i] == '7' :
+                            self.decor_simple_list.add((Decor(i,j, "tree")))
+                        if self.levelList[j][i] == '8' :
+                            self.decor_collision_list.add((Decor(i,j, "bed")))                        
+                        if self.levelList[j][i] == '9' :
+                            self.decor_collision_list.add((Decor(i,j, "porte")))
+
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()
 

@@ -12,8 +12,8 @@ class Game :
         self.is_playing = False
         self.menu = True
         self.game_over = False 
-        #self.est_vivant = player.health <= 1 
         self.tt_players = pygame.sprite.Group()
+        self.level = level
         self.player = Player(self)
         self.tt_players.add(self.player)
 
@@ -31,6 +31,12 @@ class Game :
             self.spawn_monster()
             self.spawn_monster()
         elif self.level.nblvl == 2:
+            self.spawn_monster()
+            self.spawn_monster()
+            self.spawn_monster()
+        elif self.level.nblvl == 3 :
+            self.spawn_monster()
+            self.spawn_monster()
             self.spawn_monster()
 
         #self.levelnumber = level.getNbLvl()

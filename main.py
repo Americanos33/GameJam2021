@@ -1,6 +1,7 @@
 import Classes
 from Classes import Level
 from game import Game
+import time
 import pygame, sys
 from pygame.locals import *
 import random
@@ -9,7 +10,7 @@ import random
 width = 1024
 height = 768
 rows = 32
-currentLevel = 1
+currentLevel = 0
 
 # Pygame initialization
 pygame.init()
@@ -18,9 +19,15 @@ win = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 
 # Game initialization
-level = Level.Level(currentLevel)
-level.set_LevelPlatformList()
-game = Game(level)
+
+
+
+def chgmtNiv(lvl):
+    level = Level.Level(lvl)
+    level.set_LevelPlatformList()
+    game = Game(level)
+    return (level, game)
+
 
 # Colors
 BLACK = (0, 0, 0)
@@ -71,21 +78,32 @@ def drawGrid(w, r, surface):
         pygame.draw.line(surface, (255,255,255), (x,0),(x,w))
         pygame.draw.line(surface, (255,255,255), (0,y),(w,y))
 
-    #pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
     
-#def clear(self):
-    self.win.fill(self.color)
 
-def redrawWindow():
-    win.blit(levelBackground, (0,0))
+def redrawWindow(lvl,level,game):
+    
+    
+    if lvl > 0 :
+        win.blit(levelBackground2, (0,0))
+    else :
+        win.blit(levelBackground, (0,0))
+        
     game.player.draw(win)
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
+    
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
     
+
+    for decor in level.decor_simple_list :
+        decor.draw(win)
+
+    for decor in level.decor_collision_list :
+        decor.draw(win)
+
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
 
@@ -102,10 +120,12 @@ def redrawWindow():
     for plat in level.wall_list :
         plat.draw(win)
 
+
 def main():
     # Game runing variables
     running = True
-    
+    lvle=0
+    level,game=chgmtNiv(lvle)
     inGame = game.is_playing
     inMenu = game.menu
     finMenu = False
@@ -117,8 +137,7 @@ def main():
         
         if inGame:
             
-            redrawWindow()
-
+            redrawWindow(lvle,level,game)  
             game.player.gravite()
             game.player.nb_projectiles += 1
 
@@ -149,13 +168,18 @@ def main():
                         if game.player.nb_projectiles >= 30:
                             game.player.lancer_projectile2()
                             game.player.nb_projectiles = 0
+                    if event.key == pygame.K_e:
+                        lvle += 1
+                        level,game=chgmtNiv(lvle)
+                        print(lvle)
                         
                         
                         
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut()             
+            game.player.moveSaut()
+                       
             
               
         else:      
@@ -203,7 +227,7 @@ def main():
         
 
         
-            
+        
         pygame.display.update()
         pygame.time.delay(2)
         clock.tick(60)
