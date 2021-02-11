@@ -88,7 +88,6 @@ def redrawWindow(lvl,level,game):
     else :
         win.blit(levelBackground, (0,0))
         
-    game.player.draw(win)
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
@@ -119,6 +118,8 @@ def redrawWindow(lvl,level,game):
 
     for plat in level.wall_list :
         plat.draw(win)
+
+    game.player.draw(win)
 
 
 def main():
@@ -168,10 +169,6 @@ def main():
                         if game.player.nb_projectiles >= 30:
                             game.player.lancer_projectile2()
                             game.player.nb_projectiles = 0
-                    if event.key == pygame.K_e:
-                        lvle += 1
-                        level,game=chgmtNiv(lvle)
-                        print(lvle)
                         
                         
                         
@@ -180,6 +177,12 @@ def main():
 
             game.player.moveSaut()
             win.blit(game.score_text, (20,20))          
+
+            if game.check_collisionMonstre(game.player, game.all_decors):
+                lvle += 1
+                level,game=chgmtNiv(lvle)
+                print(lvle)
+                       
             
               
         else:      

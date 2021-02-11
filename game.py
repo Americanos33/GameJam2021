@@ -21,6 +21,8 @@ class Game :
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
         self.score = 0
+        self.all_decors = pygame.sprite.Group()
+        self.score = random.randint(0,1736)
         self.pressed = {}
 
         self.level = level
@@ -42,6 +44,7 @@ class Game :
         #self.levelnumber = level.getNbLvl()
         self.spawn_wall()
         self.spawn_fruits()
+        self.spawn_decors()
 
     def check_collisionDpl(self, sprite1, sprite2):
         if not pygame.sprite.collide_rect(sprite1, sprite2):
@@ -58,17 +61,7 @@ class Game :
                 return self.check_allCollisions(sprite, group)
         return False
 
-    def check_collisionWallYGround(self, sprite, group):
-        for i in group:
-            if i.rect.top == sprite.rect.bottom:
-                return True
-        return False
-
-    def check_collisionWallYCiel(self, sprite, group):
-        for i in group:
-            if i.rect.bottom == sprite.rect.top:
-                return True
-        return True
+    
 
     def check_allCollisions(self, sprite, group):
         return pygame.sprite.spritecollideany(sprite, group)
@@ -90,5 +83,11 @@ class Game :
     def spawn_fruits(self):
         for f in self.level.fruits_list :
             self.all_fruits.add(f)
+    
     def add_score(self, point):    
         self.score +=point
+
+    def spawn_decors(self):
+        for x in self.level.decor_collision_list:
+            self.all_decors.add(x)
+        

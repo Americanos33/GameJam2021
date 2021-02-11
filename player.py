@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.y = 0
 
         if Level.getNbLvl(self.game.level) == 0 :
-            self.rect.x = 0
+            self.rect.x = 120
             self.rect.y = 500
         elif Level.getNbLvl(self.game.level) == 1:
             self.rect.x = 0
