@@ -3,6 +3,7 @@ from Classes import Level
 from game import Game
 import pygame, sys
 from pygame.locals import *
+import random
 
 # Variables
 width = 1024
@@ -57,6 +58,7 @@ menuBackground = pygame.transform.scale(menuBackground, (width, height))
 gameOver = pygame.image.load('images/Game_Over.png')
 gameOver= pygame.transform.scale(gameOver, (width,height))
 
+
 def drawGrid(w, r, surface):
     sizeBtwn = w // r
  
@@ -83,6 +85,7 @@ def redrawWindow():
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
+    
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
 
@@ -108,6 +111,8 @@ def main():
     finMenu = False
     game_Over = game.game_over 
     est_vivant = game.player.health >= 1
+    
+    
     while running:
         
         if inGame:
@@ -191,6 +196,8 @@ def main():
                         inGame = False
             win.fill((0,0,0))
             win.blit(gameOver, (0,0))
+            win.blit(game.score_text, (20,20))
+            
             
 
         
