@@ -39,6 +39,9 @@ class Player(pygame.sprite.Sprite) :
         self.tt_projectiles2 = pygame.sprite.Group()
         self.nb_projectiles = 30
 
+    def damage(self,amount): 
+        if self.health - amount > amount:
+            self.health -=amount
 
     def moveRight(self):
 
