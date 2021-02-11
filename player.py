@@ -52,17 +52,13 @@ class Player(pygame.sprite.Sprite) :
             self.nb_saut = 3
 
     def moveRight(self):
+        
+            #moves the character to the Right and changes the character image accordingly
+            self.rect.x += self.velocity
+            self.printImage(1)
+            self.game.check_collisionFruit(self, self.game.all_fruits)
+        
 
-        
-        #moves the character to the Right and changes the character image accordingly
-        self.rect.x += self.velocity
-        self.printImage(1)
-        self.game.check_collisionFruit(self, self.game.all_fruits)
-        
-            
-
-      
-        
 
     def moveLeft(self):
         
@@ -70,8 +66,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.x += -self.velocity
         self.printImage(2)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)):
-            self.rect.x += self.velocity
+
 
     def printImage(self, nb):
         if nb == 1:
@@ -88,12 +83,12 @@ class Player(pygame.sprite.Sprite) :
 
         if self.a_sauter and self.nb_saut > 0:
             
-            if self.saut_monte >= 5:
+            if self.saut_monte >= 10:
                 self.saut_monte = 0
                 self.saut = 0
                 self.a_sauter = False
             else: 
-                self.saut_monte += 1
+                self.saut_monte += 2
                 self.saut = self.saut_monte
             
         
