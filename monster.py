@@ -10,9 +10,9 @@ class Monster(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 2
 
-        if game.level.nblvl == 0:
+        if game.level.nblvl == 1:
             monst = self.image = pygame.image.load("images/oliveMs.png")
-        elif game.level.nblvl == 1:
+        elif game.level.nblvl == 2:
             monst = self.image = pygame.image.load("images/oignon.png")
 
         self.rect = monst.get_rect()

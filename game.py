@@ -21,10 +21,10 @@ class Game :
 
         self.level = level
 
-        if self.level.nblvl == 0:
+        if self.level.nblvl == 1:
             self.spawn_monster()
             self.spawn_monster()
-        elif self.level.nblvl == 1:
+        elif self.level.nblvl == 2:
             self.spawn_monster()
 
         #self.levelnumber = level.getNbLvl()
