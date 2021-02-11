@@ -18,8 +18,8 @@ clock = pygame.time.Clock()
 
 # Game initialization
 level = Level.Level(currentLevel)
+level.set_LevelPlatformList()
 game = Game(level)
-level.set_LevelPlatformList(game)
 
 # Colors
 BLACK = (0, 0, 0)
@@ -80,6 +80,8 @@ def redrawWindow():
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
+    #drawGrid(width, rows, win)
+    #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
@@ -96,9 +98,6 @@ def redrawWindow():
 
     for plat in level.wall_list :
         plat.draw(win)
-
-    for decor in level.decor_list :
-        decor.draw(win)
 
 def main():
     # Game runing variables

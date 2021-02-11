@@ -3,7 +3,7 @@ import random
 
 class Monster(pygame.sprite.Sprite):
 
-    def __init__(self, X, Y, game):
+    def __init__(self, game):
         super().__init__()
         self.game = game
         self.health = 100
@@ -16,12 +16,12 @@ class Monster(pygame.sprite.Sprite):
             monst = self.image = pygame.image.load("images/oignon.png")
 
         self.rect = monst.get_rect()
-        self.rect.x = X
+        self.rect.x = 400 + random.randint(0, 300)
         #bordure de deplacement des monstres
         self.xg = (self.rect.x)-100
         self.xd = self.rect.x
         self.count = 1
-        self.rect.y = Y 
+        self.rect.y = 608 
         self.velocity = 2 + random.randint(0, 2)
 
     def damage(self, amount):
@@ -73,5 +73,4 @@ class Monster(pygame.sprite.Sprite):
                     self.game.player.damage(self.attack)
     
         
-    def draw(self, surface):
-        surface.blit(self.image, self.rect)
+        

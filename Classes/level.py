@@ -5,9 +5,6 @@ from Classes.Fruits import Date
 from Classes.Fruits import Fraise
 from Classes.Fruits import Orange
 from Classes.Fruits import Pasteque
-from Classes.Decor import Decor
-import monster
-from monster import Monster
 import pygame, sys
 from pygame.locals import *
 
@@ -23,8 +20,6 @@ class Level :
                 
                 self.wall_list = pygame.sprite.Group()
                 self.fruits_list = pygame.sprite.Group()
-                self.decor_list = pygame.sprite.Group()
-                self.monster_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -40,7 +35,7 @@ class Level :
                     l[i].pop()
                 return l
 
-        def createLevelPlatformList(self, game):
+        def createLevelPlatformList(self):
                 self.levelList = self.readMap()
                 
                 for j in range(len(self.levelList)):
@@ -57,17 +52,11 @@ class Level :
                             self.fruits_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
                             self.fruits_list.add((Pasteque(i,j)))
-                        if self.levelList[j][i] == '7' :
-                            self.decor_list.add((Decor(i,j, "tree")))
-                        if self.levelList[j][i] == '8' :
-                            self.decor_list.add((Decor(i,j, "bed")))
-                        if self.levelList[j][i] == '9' :
-                            self.decor_list.add((Decor(i,j, "porte")))
-                        if self.levelList[j][i] == 'm' :
-                            self.monster_list.add((Monster(i,j, game)))
+                        if self.levelList[j][i] == 'b' :
+                            self.decor_list.add((Decor(i,j)))
             
-        def set_LevelPlatformList(self, game):
-                self.createLevelPlatformList(game)
+        def set_LevelPlatformList(self):
+                self.createLevelPlatformList()
 
         def getNbLvl(self):
             return self.nblvl
