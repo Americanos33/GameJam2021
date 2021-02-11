@@ -26,8 +26,10 @@ class Player(pygame.sprite.Sprite) :
         #self.rect = self.image.get_rect()
         self.rect = Rect(0,0,40,64)
         self.rect.x = 0
-        self.rect.y = 6080
+        self.rect.y = 0
         self.win = True
+
+        self.rect2 = Rect(0,0,40,63)
 
         self.saut = 0
         self.saut_monte = 0
@@ -45,14 +47,25 @@ class Player(pygame.sprite.Sprite) :
         if self.health <= 10:
             self.est_vivant= False
             
+
+    def gravite(self):
+        if  not pygame.sprite.spritecollideany(self, self.game.all_walls):
+            self.rect.y += 1
+        else : 
+            self.nb_saut = 3
+
     def moveRight(self):
 
+        
         #moves the character to the Right and changes the character image accordingly
         self.rect.x += self.velocity
         self.printImage(1)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)) :
-            self.rect.x += -self.velocity
+        
+            
+
+      
+        
 
     def moveLeft(self):
         
@@ -76,25 +89,21 @@ class Player(pygame.sprite.Sprite) :
 
     def moveSaut(self):
 
-        if self.a_sauter:
+        if self.a_sauter and self.nb_saut > 0:
             
             if self.saut_monte >= 5:
-                self.saut_descend -= 1.5
-                self.saut = self.saut_descend
+                self.saut_monte = 0
+                self.saut = 0
+                self.a_sauter = False
             else: 
-                self.saut_monte += 2
+                self.saut_monte += 1
                 self.saut = self.saut_monte
             
-            if self.saut_descend < 0:
-                self.saut_monte = 0
-                self.saut_descend = 5
-                self.a_sauter = False
         
         self.rect.y -= (10 * (self.saut/2))
         self.game.check_collisionFruit(self, self.game.all_fruits)
 
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls) or (self.game.check_collisionWallYCiel(self, self.game.all_walls))):
-            self.rect.y += (10 * (self.saut/2))
+        
 
 
     def draw(self, surface) :

@@ -81,7 +81,7 @@ def redrawWindow():
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
     #drawGrid(width, rows, win)
-    pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
+    #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
@@ -114,6 +114,7 @@ def main():
             
             redrawWindow()
 
+            game.player.gravite()
             game.player.nb_projectiles += 1
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
@@ -122,10 +123,6 @@ def main():
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
                     game.player.moveLeft()  
 
-
-            if game.player.rect.y >= 609:
-                game.player.nb_saut =2 
-                game.player.rect.y=604
                 
 
             for event in pygame.event.get():
