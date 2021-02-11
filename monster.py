@@ -34,9 +34,12 @@ class Monster(pygame.sprite.Sprite):
 
         #verifier si ses pv <= 0
         if self.health <= 0: 
+            self.game.add_score(20)
+            
             #Supprimer le monstre
             self.game.tt_monsters.remove(self) #fais gaffe ça supprime tous les monstres 
-                
+            #ajout du score
+            
     def update_health_bar(self, surface):
         #couleur de la jauge (vert)
         bar_color = (111, 210, 46)

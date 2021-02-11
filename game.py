@@ -20,8 +20,8 @@ class Game :
         self.tt_monsters = pygame.sprite.Group()
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
+        self.score = 0
         self.all_decors = pygame.sprite.Group()
-        self.score = random.randint(0,1736)
         self.pressed = {}
 
         self.level = level
@@ -82,6 +82,9 @@ class Game :
     def spawn_fruits(self):
         for f in self.level.fruits_list :
             self.all_fruits.add(f)
+    
+    def add_score(self, point):    
+        self.score +=point
 
     def spawn_decors(self):
         for x in self.level.decor_collision_list:
