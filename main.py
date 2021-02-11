@@ -119,6 +119,9 @@ def redrawWindow(lvl,level,game):
     for plat in level.wall_list :
         plat.draw(win)
 
+    game.drawScore(win)
+    print(game.score)
+
     game.player.draw(win)
 
 
@@ -175,8 +178,7 @@ def main():
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut()
-            win.blit(game.score_text, (20,20))          
+            game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
                 lvle += 1

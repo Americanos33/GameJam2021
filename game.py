@@ -22,21 +22,24 @@ class Game :
         self.all_walls = pygame.sprite.Group()
         self.score = 0
         self.all_decors = pygame.sprite.Group()
-        self.score = random.randint(0,1736)
         self.pressed = {}
 
         self.level = level
-        self.font = pygame.font.SysFont("monospace", 16)
-        self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
+
+        self.nb_monstres = 0
 
         if self.level.nblvl == 1:
+            self.nb_monstres = 3
             self.spawn_monster()
             self.spawn_monster()
         elif self.level.nblvl == 2:
+            self.nb_monstres = 4
             self.spawn_monster()
             self.spawn_monster()
             self.spawn_monster()
         elif self.level.nblvl == 3 :
+            self.nb_monstres = 5
+            self.spawn_monster()
             self.spawn_monster()
             self.spawn_monster()
             self.spawn_monster()
@@ -90,4 +93,9 @@ class Game :
     def spawn_decors(self):
         for x in self.level.decor_collision_list:
             self.all_decors.add(x)
+
+    def drawScore(self, surface):
+        self.font = pygame.font.SysFont("monospace", 16)
+        self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
+        surface.blit(self.score_text, (20,20))
         

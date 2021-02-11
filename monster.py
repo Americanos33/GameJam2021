@@ -10,6 +10,52 @@ class Monster(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 1
 
+        #if game.level.nblvl == 1:
+        #    i = 1
+        #    monst = self.image = pygame.image.load("images/oliveMs.png")
+        #    self.rect = monst.get_rect()
+        #    for i < 3 :
+        #        if i == 1 :
+#
+        #        elif i == 2 :
+#
+        #        elif i == 3 :
+        #            
+#
+        #        self.rect.x = 400 + random.randint(0, 300)
+        #        #bordure de deplacement des monstres
+        #        self.xg = (self.rect.x)-100
+        #        self.xd = self.rect.x
+        #        self.count = 1
+        #        self.rect.y = 608 
+        #elif game.level.nblvl == 2:
+        #    monst = self.image = pygame.image.load("images/oignon.png")
+        #    self.rect = monst.get_rect()
+        #    self.rect.x = 400 + random.randint(0, 300)
+        #    #bordure de deplacement des monstres
+        #    self.xg = (self.rect.x)-100
+        #    self.xd = self.rect.x
+        #    self.count = 1
+        #    self.rect.y = 608 
+        #elif game.level.nblvl == 3:
+        #    monst = self.image = pygame.image.load("images/concombre.png")
+        #    self.rect = monst.get_rect()
+        #    self.rect.x = 400 + random.randint(0, 300)
+        #    #bordure de deplacement des monstres
+        #    self.xg = (self.rect.x)-100
+        #    self.xd = self.rect.x
+        #    self.count = 1
+        #    self.rect.y = 608 
+        #elif game.level.nblvl == 0:
+        #    monst = self.image = pygame.image.load("images/Boss1.png")
+        #    self.rect = monst.get_rect()
+        #    self.rect.x = 400 + random.randint(0, 300)
+        #    #bordure de deplacement des monstres
+        #    self.xg = (self.rect.x)-100
+        #    self.xd = self.rect.x
+        #    self.count = 1
+        #    self.rect.y = 608 
+
         if game.level.nblvl == 1:
             monst = self.image = pygame.image.load("images/oliveMs.png")
         elif game.level.nblvl == 2:
