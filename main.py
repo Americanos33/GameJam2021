@@ -54,6 +54,9 @@ wall = pygame.transform.smoothscale(wall, (32,32))
 menuBackground = pygame.image.load('images/menu1.jpg')
 menuBackground = pygame.transform.scale(menuBackground, (width, height))
 
+gameOver = pygame.image.load('images/Game_Over.png')
+gameOver= pygame.transform.scale(gameOver, (width,height))
+
 def drawGrid(w, r, surface):
     sizeBtwn = w // r
  
@@ -68,6 +71,8 @@ def drawGrid(w, r, surface):
 
     #pygame.draw.line(surface, (160,82,45), (0,668), (1024,668), 5)
     
+#def clear(self):
+    self.win.fill(self.color)
 
 def redrawWindow():
     win.blit(levelBackground, (0,0))
@@ -78,17 +83,33 @@ def redrawWindow():
     #drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
+    for projectile in game.player.tt_projectiles1:
+        projectile.move_g()
+
+    for projectile in game.player.tt_projectiles2:
+        projectile.move_d()
+
+    for monster in game.tt_monsters:
+        monster.deplaM()
+        monster.update_health_bar(win)
+
+    for plat in level.fruits_list :
+        plat.draw(win)
+
+    for plat in level.wall_list :
+        plat.draw(win)
 
 def main():
     # Game runing variables
     running = True
     
-    inGame = False
-    inMenu = True
+    inGame = game.is_playing
+    inMenu = game.menu
     finMenu = False
-
+    game_Over = game.game_over 
+    est_vivant = game.player.health >= 1
     while running:
-
+        
         if inGame:
             
             redrawWindow()
@@ -133,37 +154,51 @@ def main():
                     game.pressed[event.key] = False
 
             game.player.moveSaut()             
+            
+              
+        else:      
+            inGame = False
+            game.player.est_vivant= False
 
-
-        elif inMenu:
+        if inMenu:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     inMenu = False
                     pygame.display.quit()
                     pygame.quit()
                     sys.exit()
-                    runnig = False
+                    running = False
                 if event.type == KEYDOWN:      
-                    if event.key == K_SPACE:
+                    if event.key == pygame.K_SPACE:
                         inMenu = False
                         inGame = True
+                        game.player.est_vivant= True
+                        print(inGame)
+            win.fill((0,0,0))
             win.blit(menuBackground, (0,0))
         
-        for projectile in game.player.tt_projectiles1:
-            projectile.move_g()
+        elif not game.player.est_vivant:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    inMenu = False
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
+                    running = False
+                if event.type == KEYDOWN :
+                    if event.key == K_ESCAPE :
+                        pygame.quit()
+                        sys.exit()
+                    if event.key == K_SPACE :
+                        inMenu = True
+                        inGame = False
+            win.fill((0,0,0))
+            win.blit(gameOver, (0,0))
+            
 
-        for projectile in game.player.tt_projectiles2:
-            projectile.move_d()
+        
 
-        for monster in game.tt_monsters:
-            monster.deplaM()
-            monster.update_health_bar(win)
-
-        for plat in level.fruits_list :
-            plat.draw(win)
-
-        for plat in level.wall_list :
-            plat.draw(win)
+        
             
         pygame.display.update()
         pygame.time.delay(2)
