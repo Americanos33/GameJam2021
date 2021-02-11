@@ -24,13 +24,7 @@ class Game :
 
         self.level = level
 
-        if self.level.nblvl == 1:
-            self.spawn_monster()
-            self.spawn_monster()
-        elif self.level.nblvl == 2:
-            self.spawn_monster()
-
-        #self.levelnumber = level.getNbLvl()
+        self.spawn_monsters()
         self.spawn_wall()
         self.spawn_fruits()
 
@@ -70,9 +64,9 @@ class Game :
     def check_collisionMonstre(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-    def spawn_monster(self):
-        monster=Monster(self)
-        self.tt_monsters.add(monster)
+    def spawn_monsters(self):
+        for m in self.level.monster_list :
+            self.tt_monsters.add(m)
 
     def spawn_wall(self):
         for w in self.level.wall_list :
