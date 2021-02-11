@@ -43,8 +43,8 @@ class Player(pygame.sprite.Sprite) :
     def damage(self,amount): 
         if self.health - amount > amount:
             self.health -=amount
-        if self.health <= 10:
-            self.est_vivant= False
+        if self.health <= 10 :
+            self.est_vivant = False
             
 
     def gravite(self):
@@ -52,7 +52,8 @@ class Player(pygame.sprite.Sprite) :
                 self.rect.y += 5
         else : 
             self.nb_saut = 2
-        if self.rect.y >= 668:
+            
+        if self.rect.y >= 760:
             self.est_vivant = False
 
     def moveRight(self):

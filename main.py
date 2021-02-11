@@ -10,7 +10,6 @@ width = 1024
 height = 768
 rows = 32
 
-
 # Pygame initialization
 pygame.init()
 pygame.display.set_caption("Le lit perdu")
@@ -94,6 +93,10 @@ def redrawWindow(lvl,level,game):
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
+
+    for decor in level.decor_list :
+        decor.draw(win)
+
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
 
@@ -109,7 +112,6 @@ def redrawWindow(lvl,level,game):
 
     for plat in level.wall_list :
         plat.draw(win)
-
 
 
 def main():
