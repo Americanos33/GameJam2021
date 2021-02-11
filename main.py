@@ -8,7 +8,7 @@ from pygame.locals import *
 width = 1024
 height = 768
 rows = 32
-currentLevel = 1
+currentLevel = 2
 
 # Pygame initialization
 pygame.init()
@@ -76,13 +76,16 @@ def drawGrid(w, r, surface):
 
 def redrawWindow():
     win.blit(levelBackground, (0,0))
-    game.player.draw(win)
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
+
+    for decor in level.decor_list :
+        decor.draw(win)
+
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
 
@@ -98,6 +101,8 @@ def redrawWindow():
 
     for plat in level.wall_list :
         plat.draw(win)
+
+    game.player.draw(win)
 
 def main():
     # Game runing variables
