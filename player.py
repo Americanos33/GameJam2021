@@ -52,6 +52,8 @@ class Player(pygame.sprite.Sprite) :
                 self.rect.y += 5
         else : 
             self.nb_saut = 2
+        if self.rect.y >= 668:
+            self.est_vivant = False
 
     def moveRight(self):
 

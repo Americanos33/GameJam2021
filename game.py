@@ -29,6 +29,12 @@ class Game :
             self.spawn_monster()
         elif self.level.nblvl == 2:
             self.spawn_monster()
+            self.spawn_monster()
+            self.spawn_monster()
+        elif self.level.nblvl == 3 :
+            self.spawn_monster()
+            self.spawn_monster()
+            self.spawn_monster()
 
         #self.levelnumber = level.getNbLvl()
         self.spawn_wall()
