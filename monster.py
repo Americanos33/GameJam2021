@@ -8,7 +8,7 @@ class Monster(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 2
+        self.attack = 0.3
 
         if game.level.nblvl == 1:
             monst = self.image = pygame.image.load("images/oliveMs.png")
@@ -62,11 +62,15 @@ class Monster(pygame.sprite.Sprite):
             if self.rect.x < self.xd:
                 if not self.game.check_collisionMonstre(self,self.game.tt_players):
                     self.rect.x += self.velocity
+                #si le monstre est en collision avec le joueur il inflige des degats
+                else:   
+                    self.game.player.damage(self.attack)
         if self.count < 0 :
             if self.rect.x > self.xg:
                 if not self.game.check_collisionMonstre(self,self.game.tt_players):
                     self.rect.x -= self.velocity
-
+                else: 
+                    self.game.player.damage(self.attack)
     
         
         

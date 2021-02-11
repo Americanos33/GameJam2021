@@ -39,6 +39,9 @@ class Player(pygame.sprite.Sprite) :
         self.tt_projectiles2 = pygame.sprite.Group()
         self.nb_projectiles = 30
 
+    def damage(self,amount): 
+        if self.health - amount > amount:
+            self.health -=amount
 
     def gravite(self):
         if  not self.game.check_collisionWallYGround(self, self.game.all_walls):
@@ -118,11 +121,11 @@ class Player(pygame.sprite.Sprite) :
         
         #definir la position de note jauge de vie
         #ainsi que sa largeur et son epaisseur 
-        bar_position = [self.rect.x - 15, self.rect.y, self.health ,5]
+        bar_position = [self.rect.x - 25, self.rect.y, self.health ,7]
         
         #definir la position de l'arriere plan 
         #de la jauge de vie
-        back_bar_position = [self.rect.x - 15, self.rect.y, self.max_health ,5]
+        back_bar_position = [self.rect.x - 25, self.rect.y, self.max_health ,7]
 
         #dessiner notre barre de vie
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
