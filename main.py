@@ -8,7 +8,7 @@ from pygame.locals import *
 width = 1024
 height = 768
 rows = 32
-currentLevel = 0
+currentLevel = 3
 
 # Pygame initialization
 pygame.init()
@@ -96,10 +96,10 @@ def main():
             game.player.nb_projectiles += 1
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
-                    game.player.moveRight(level)
+                    game.player.moveRight()
 
             elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-                    game.player.moveLeft(level)  
+                    game.player.moveLeft()  
 
 
             if game.player.rect.y >= 609:

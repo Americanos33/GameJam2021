@@ -10,8 +10,12 @@ class Wall(pygame.sprite.Sprite) :
         self.image = pygame.image.load("images/wall.png")
         self.image = pygame.transform.smoothscale(self.image, (32,32))
         self.rect = self.image.get_rect()
-        self.rect.left = 20*(self.X) 
-        self.rect.bottom = 20*(self.Y+1)
+        self.rect.left = 32*(self.X) 
+        self.rect.bottom = 32*(self.Y)
+        self.rect.height = 32
+        self.rect.width = 32
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+        #r = pygame.Surface((self.rect.width, self.rect.height))
+        #surface.blit(r, self.rect)
