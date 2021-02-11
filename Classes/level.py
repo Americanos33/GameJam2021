@@ -51,6 +51,8 @@ class Level :
                             self.fruits_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
                             self.fruits_list.add((Pasteque(i,j)))
+                        if self.levelList[j][i] == 'b' :
+                            self.decor_list.add((Decor(i,j)))
             
         def set_LevelPlatformList(self):
                 self.createLevelPlatformList()

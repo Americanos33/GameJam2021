@@ -8,7 +8,7 @@ from pygame.locals import *
 width = 1024
 height = 768
 rows = 32
-currentLevel = 3
+currentLevel = 1
 
 # Pygame initialization
 pygame.init()
