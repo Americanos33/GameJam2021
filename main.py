@@ -16,7 +16,7 @@ pygame.display.set_caption("Le lit perdu")
 win = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 
-# Character initialization
+# Game initialization
 level = Level.Level(currentLevel)
 level.set_LevelPlatformList()
 game = Game(level)
@@ -29,6 +29,9 @@ GREY = (127,127,127)
 # Images
 levelBackground = pygame.image.load('images/ciel_jour.jpg')
 levelBackground = pygame.transform.scale(levelBackground, (width, height))
+
+levelBackground2 = pygame.image.load('images/ciel_nuit-2.jpg')
+levelBackground2 = pygame.transform.scale(levelBackground2, (width, height))
 
 banane = pygame.image.load('images/banane.png')
 banane = pygame.transform.smoothscale(banane, (32,32))
@@ -74,17 +77,20 @@ def redrawWindow():
     game.tt_monsters.draw(win)
     #drawGrid(width, rows, win)
     pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
-    game.player.update_health_bar(win)
+    #game.player.update_health_bar(win)
 
 def main():
     # Game runing variables
+    running = True
+    
     inGame = False
     inMenu = True
+    finMenu = False
 
-    while True:
+    while running:
 
         if inGame:
-
+            
             redrawWindow()
 
             game.player.nb_projectiles += 1
@@ -106,7 +112,7 @@ def main():
                     inGame = False
                     pygame.display.quit()
                     pygame.quit()
-                    break
+                    runnig = False
                 if event.type == KEYDOWN:
                     game.pressed[event.key] = True
                     if event.key == pygame.K_UP:
@@ -136,7 +142,7 @@ def main():
                     pygame.display.quit()
                     pygame.quit()
                     sys.exit()
-                    break
+                    runnig = False
                 if event.type == KEYDOWN:      
                     if event.key == K_SPACE:
                         inMenu = False

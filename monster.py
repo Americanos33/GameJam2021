@@ -1,4 +1,5 @@
 import pygame
+import random
 
 class Monster(pygame.sprite.Sprite):
 
@@ -8,15 +9,20 @@ class Monster(pygame.sprite.Sprite):
         self.health = 100
         self.max_health = 100
         self.attack = 2
-        monst = self.image = pygame.image.load("images/oliveMs.png")
+
+        if game.level.nblvl == 0:
+            monst = self.image = pygame.image.load("images/oliveMs.png")
+        elif game.level.nblvl == 1:
+            monst = self.image = pygame.image.load("images/oignon.png")
+
         self.rect = monst.get_rect()
-        self.rect.x = 780
+        self.rect.x = 400 + random.randint(0, 300)
         #bordure de deplacement des monstres
         self.xg = (self.rect.x)-100
         self.xd = self.rect.x
         self.count = 1
-        self.rect.y = 608
-        self.velocity = 2
+        self.rect.y = 608 - random.randint(0, 100)
+        self.velocity = 2 + random.randint(0, 2)
 
     def damage(self, amount):
         #infliger les degats

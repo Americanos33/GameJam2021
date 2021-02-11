@@ -9,15 +9,24 @@ from Classes.Level import Level
 class Game :
 
     def __init__(self, level):
+
         self.tt_players = pygame.sprite.Group()
         self.player = Player(self)
         self.tt_players.add(self.player)
+
         self.tt_monsters = pygame.sprite.Group()
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
         self.pressed = {}
-        self.spawn_monster()
+
         self.level = level
+
+        if self.level.nblvl == 0:
+            self.spawn_monster()
+            self.spawn_monster()
+        elif self.level.nblvl == 1:
+            self.spawn_monster()
+
         #self.levelnumber = level.getNbLvl()
         self.spawn_wall()
         self.spawn_fruits()
