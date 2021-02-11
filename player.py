@@ -111,11 +111,11 @@ class Player(pygame.sprite.Sprite) :
         
         #definir la position de note jauge de vie
         #ainsi que sa largeur et son epaisseur 
-        bar_position = [self.rect.x - 15, self.rect.y, self.health ,5]
+        bar_position = [self.rect.x - 25, self.rect.y, self.health ,5]
         
         #definir la position de l'arriere plan 
         #de la jauge de vie
-        back_bar_position = [self.rect.x - 15, self.rect.y, self.max_health ,5]
+        back_bar_position = [self.rect.x - 25, self.rect.y, self.max_health ,5]
 
         #dessiner notre barre de vie
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
