@@ -32,8 +32,10 @@ class Game :
         self.spawn_fruits()
 
     def check_collisionWallX(self, sprite, group):
+        #r = pygame.Rect(sprite.rect.width, sprite.rect.height)
         for i in group:
-            if i.rect.colliderect(sprite.rect):
+            if (i.rect.top == sprite.rect.bottom):
+                
                 return True
         return False
 
@@ -47,7 +49,7 @@ class Game :
         for i in group:
             if i.rect.bottom == sprite.rect.top:
                 return True
-        return False
+        return True
 
     
 

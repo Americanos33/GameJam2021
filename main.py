@@ -76,7 +76,7 @@ def redrawWindow():
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
     #drawGrid(width, rows, win)
-    pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
+    #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
     game.player.update_health_bar(win)
 
 def main():

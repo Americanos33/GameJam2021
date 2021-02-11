@@ -29,6 +29,8 @@ class Player(pygame.sprite.Sprite) :
         self.rect.y = 0
         self.win = True
 
+        self.rect2 = Rect(0,0,40,63)
+
         self.saut = 0
         self.saut_monte = 0
         self.saut_descend = 5
@@ -44,20 +46,19 @@ class Player(pygame.sprite.Sprite) :
             self.health -=amount
 
     def gravite(self):
-        if  not self.game.check_collisionWallYGround(self, self.game.all_walls):
-            if not self.game.check_collisionWallX(self, self.game.all_walls):
-                self.rect.y += 1
+        if  not pygame.sprite.spritecollideany(self, self.game.all_walls):
+            self.rect.y += 1
         else : 
-            self.nb_saut = 2
+            self.nb_saut = 3
 
     def moveRight(self):
 
+        
         #moves the character to the Right and changes the character image accordingly
         self.rect.x += self.velocity
         self.printImage(1)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)) :
-            self.rect.x += -self.velocity
+        
             
 
       
@@ -69,7 +70,7 @@ class Player(pygame.sprite.Sprite) :
         self.rect.x += -self.velocity
         self.printImage(2)
         self.game.check_collisionFruit(self, self.game.all_fruits)
-        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionMonstre(self, self.game.all_walls)):
+        if (self.game.check_collisionMonstre(self, self.game.tt_monsters)) or (self.game.check_collisionWallX(self, self.game.all_walls)):
             self.rect.x += self.velocity
 
     def printImage(self, nb):
@@ -92,7 +93,7 @@ class Player(pygame.sprite.Sprite) :
                 self.saut = 0
                 self.a_sauter = False
             else: 
-                self.saut_monte += 2
+                self.saut_monte += 1
                 self.saut = self.saut_monte
             
         
@@ -103,9 +104,9 @@ class Player(pygame.sprite.Sprite) :
 
 
     def draw(self, surface) :
-        #surface.blit(self.image, self.rect)
-        r = pygame.Surface((self.rect.width, self.rect.height))
-        surface.blit(r, self.rect)
+        surface.blit(self.image, self.rect)
+        #r = pygame.Surface((self.rect.width, self.rect.height))
+        #surface.blit(r, self.rect)
 
     def lancer_projectile1(self):
         self.tt_projectiles1.add(Projectile(self))
