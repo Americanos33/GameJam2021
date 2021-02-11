@@ -59,7 +59,7 @@ pasteque = pygame.transform.smoothscale(pasteque, (32,32))
 wall = pygame.image.load('images/wall.png')
 wall = pygame.transform.smoothscale(wall, (32,32))
 
-menuBackground = pygame.image.load('images/menu1.jpg')
+menuBackground = pygame.image.load('images/menu1.png')
 menuBackground = pygame.transform.scale(menuBackground, (width, height))
 
 gameOver = pygame.image.load('images/Game_Over.png')
@@ -94,7 +94,6 @@ def redrawWindow(lvl,level,game):
     
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
-    game.player.update_health_bar(win)
     
 
     for decor in level.decor_simple_list :
@@ -119,6 +118,7 @@ def redrawWindow(lvl,level,game):
     for plat in level.wall_list :
         plat.draw(win)
 
+    game.player.update_health_bar(win)
     game.player.draw(win)
     #win.blit(game.score_text, (20,20))
 
