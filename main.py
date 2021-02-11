@@ -179,7 +179,7 @@ def main():
                     game.pressed[event.key] = False
 
             game.player.moveSaut()
-                       
+            win.blit(game.score_text, (20,20))          
             
               
         else:      
