@@ -17,6 +17,7 @@ class Level :
                 self.nblvl = levelNumber
                 self.levelName = 'Levels/level' + str(levelNumber) + '.txt'
                 self.levelList = []
+                
                 self.wall_list = pygame.sprite.Group()
                 self.fruits_list = pygame.sprite.Group()
 

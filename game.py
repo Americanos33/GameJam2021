@@ -34,6 +34,12 @@ class Game :
         self.spawn_wall()
         self.spawn_fruits()
 
+    def check_collisionDpl(self, sprite1, sprite2):
+        if not pygame.sprite.collide_rect(sprite1, sprite2):
+            return True
+        
+    
+
     def check_collisionWallX(self, sprite, group):
         #r = pygame.Rect(sprite.rect.width, sprite.rect.height)
         for i in group:

@@ -21,7 +21,7 @@ class Monster(pygame.sprite.Sprite):
         self.xg = (self.rect.x)-100
         self.xd = self.rect.x
         self.count = 1
-        self.rect.y = 608 - random.randint(0, 100)
+        self.rect.y = 608 
         self.velocity = 2 + random.randint(0, 2)
 
     def damage(self, amount):
