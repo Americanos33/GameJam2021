@@ -20,7 +20,7 @@ class Game :
         self.tt_monsters = pygame.sprite.Group()
         self.all_fruits = pygame.sprite.Group()
         self.all_walls = pygame.sprite.Group()
-        self.score = random.randint(129,1873)
+        self.score = 0
         self.all_decors = pygame.sprite.Group()
         self.pressed = {}
 
