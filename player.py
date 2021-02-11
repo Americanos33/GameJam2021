@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite) :
         self.max_health = 100
         self.attack = 30
         self.velocity = 3
-        
+        self.est_vivant = True
         self.dx = 0
         self.dy = 0
 
@@ -43,6 +43,9 @@ class Player(pygame.sprite.Sprite) :
     def damage(self,amount): 
         if self.health - amount > amount:
             self.health -=amount
+        if self.health <= 10:
+            self.est_vivant= False
+            
 
     def gravite(self):
         if  not pygame.sprite.spritecollideany(self, self.game.all_walls) :

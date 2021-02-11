@@ -8,7 +8,7 @@ class Monster(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 0.3
+        self.attack = 1
 
         if game.level.nblvl == 1:
             monst = self.image = pygame.image.load("images/oliveMs.png")

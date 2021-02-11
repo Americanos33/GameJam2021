@@ -9,7 +9,10 @@ from Classes.Level import Level
 class Game :
 
     def __init__(self, level):
-
+        self.is_playing = False
+        self.menu = True
+        self.game_over = False 
+        #self.est_vivant = player.health <= 1 
         self.tt_players = pygame.sprite.Group()
         self.player = Player(self)
         self.tt_players.add(self.player)
