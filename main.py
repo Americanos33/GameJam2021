@@ -134,7 +134,6 @@ def main():
     game_Over = game.game_over 
     est_vivant = game.player.health >= 1
     score = 0
-    Victoire = False
     
     
     while running:
@@ -180,9 +179,6 @@ def main():
             game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
-                if lvle == 3:
-                    Victoire = True
-                else :
                     score += game.score
                     lvle += 1
                     level,game=chgmtNiv(lvle)
@@ -229,13 +225,7 @@ def main():
             win.blit(gameOver, (0,0))
             win.blit(game.score_text, (20,20))
             
-        elif Victoire == True:
-            
 
-        
-
-        
-        
         pygame.display.update()
         pygame.time.delay(2)
         clock.tick(60)
