@@ -217,7 +217,6 @@ def main():
                     lvle += 1
                     level,game=chgmtNiv(lvle)
                     game.updatePerso(a, h, s)
-                    
 
             if lvle == 0 and game.nb_fruits_graille == 5 :
                 game.player.checkfruitsGraille()
