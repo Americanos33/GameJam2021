@@ -171,6 +171,10 @@ class Game :
         self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
         surface.blit(self.score_text, (20,20))
 
+    def drawLives(self, surface, nb):
+        self.font = pygame.font.SysFont("monospace", 16)
+        self.score_text = self.font.render(f"Morts :  {nb}",1,(255,255,255))
+        surface.blit(self.score_text, (20,40))
         
     def updatePerso(self, a, h, s):
         self.player.attack = a
