@@ -324,7 +324,9 @@ def main():
                 text = font.render("(Score doublé car pas de mort !)",1,(0,0,0))
 
             win.blit(score_text, (600,500))
-            win.blit(text, (415,550))
+            
+            if nbmorts == 0 :
+                win.blit(text, (415,550))
             
 
         pygame.display.update()
