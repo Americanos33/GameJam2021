@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from monster import Monster
+from boss import Boss
 from pygame.locals import *
 import Classes.Level
 from Classes.Level import Level
@@ -19,6 +20,7 @@ class Game :
         self.tt_players.add(self.player)
 
         self.tt_monsters = pygame.sprite.Group()
+        self.tt_boss = pygame.sprite.Group()
         
         self.banane_list = pygame.sprite.Group()
         self.orange_list = pygame.sprite.Group()
@@ -65,6 +67,8 @@ class Game :
             self.spawn_monster()
             self.nb_monstres = 5
             self.spawn_monster()
+        elif self.level.nblvl == 4 :
+            self.spawn_boss()
 
         #self.levelnumber = level.getNbLvl()
         self.spawn_wall()
@@ -138,6 +142,10 @@ class Game :
     def spawn_monster(self):
         monster=Monster(self)
         self.tt_monsters.add(monster)
+    
+    def spawn_boss(self):
+        boss=Boss(self)
+        self.tt_boss.add(boss)
 
     def spawn_wall(self):
         for w in self.level.wall_list :

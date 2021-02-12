@@ -142,7 +142,7 @@ def redrawWindow(lvl,level,game, nbmorts):
 def main():
     # Game runing variables
     running = True
-    lvle=0
+    lvle=4
     level,game=chgmtNiv(lvle, 0)
 
     inGame = game.is_playing
@@ -205,7 +205,7 @@ def main():
             game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
-                if lvle >= 3:
+                if lvle >= 4:
                     game_Win = True
                     inGame = False
                 elif lvle == 0:
