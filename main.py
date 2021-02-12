@@ -133,6 +133,8 @@ def redrawWindow(lvl,level,game, nbmorts):
     for plat in level.wall_list :
         plat.draw(win)
 
+    game.tt_boss.draw(win)
+
     game.drawScore(win)
     game.drawLives(win, nbmorts)
 
