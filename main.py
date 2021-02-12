@@ -155,7 +155,7 @@ def redrawWindow(lvl,level,game, nbmorts):
 def main():
     # Game runing variables
     running = True
-    lvle=4
+    lvle=0
     level,game=chgmtNiv(lvle, 0)
 
     inGame = game.is_playing
