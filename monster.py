@@ -10,69 +10,108 @@ class Monster(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 1
 
-        #if game.level.nblvl == 1:
-        #    i = 1
-        #    monst = self.image = pygame.image.load("images/oliveMs.png")
-        #    self.rect = monst.get_rect()
-        #    for i < 3 :
-        #        if i == 1 :
-#
-        #        elif i == 2 :
-#
-        #        elif i == 3 :
-        #            
-#
-        #        self.rect.x = 400 + random.randint(0, 300)
-        #        #bordure de deplacement des monstres
-        #        self.xg = (self.rect.x)-100
-        #        self.xd = self.rect.x
-        #        self.count = 1
-        #        self.rect.y = 608 
-        #elif game.level.nblvl == 2:
-        #    monst = self.image = pygame.image.load("images/oignon.png")
-        #    self.rect = monst.get_rect()
-        #    self.rect.x = 400 + random.randint(0, 300)
-        #    #bordure de deplacement des monstres
-        #    self.xg = (self.rect.x)-100
-        #    self.xd = self.rect.x
-        #    self.count = 1
-        #    self.rect.y = 608 
-        #elif game.level.nblvl == 3:
-        #    monst = self.image = pygame.image.load("images/concombre.png")
-        #    self.rect = monst.get_rect()
-        #    self.rect.x = 400 + random.randint(0, 300)
-        #    #bordure de deplacement des monstres
-        #    self.xg = (self.rect.x)-100
-        #    self.xd = self.rect.x
-        #    self.count = 1
-        #    self.rect.y = 608 
-        #elif game.level.nblvl == 0:
-        #    monst = self.image = pygame.image.load("images/Boss1.png")
-        #    self.rect = monst.get_rect()
-        #    self.rect.x = 400 + random.randint(0, 300)
-        #    #bordure de deplacement des monstres
-        #    self.xg = (self.rect.x)-100
-        #    self.xd = self.rect.x
-        #    self.count = 1
-        #    self.rect.y = 608 
-
         if game.level.nblvl == 1:
             monst = self.image = pygame.image.load("images/oliveMs.png")
+            self.rect = monst.get_rect()
+            if game.nb_monstres == 1 :
+                self.rect.x = 704
+                self.rect.y = 200
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            elif game.nb_monstres == 2 :
+                self.rect.x = 192
+                self.rect.y = 290
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            elif game.nb_monstres == 3 :
+                self.rect.x = 416
+                self.rect.y = 606
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+
         elif game.level.nblvl == 2:
             monst = self.image = pygame.image.load("images/oignon.png")
+            self.rect = monst.get_rect()
+            if game.nb_monstres == 1 :
+                self.rect.x = 640
+                self.rect.y = 50
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 2 :
+                self.rect.x = 576
+                self.rect.y = 250
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 3 :
+                self.rect.x = 64
+                self.rect.y = 310
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 4 :
+                self.rect.x = 512
+                self.rect.y = 600
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+  
         elif game.level.nblvl == 3:
             monst = self.image = pygame.image.load("images/concombre.png")
-        elif game.level.nblvl == 0:
-            monst = self.image = pygame.image.load("images/Boss1.png")
+            self.rect = monst.get_rect()
+            if game.nb_monstres == 1 :
+                self.rect.x = 960
+                self.rect.y = 35
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 2 :
+                self.rect.x = 160
+                self.rect.y = 65
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 3 :
+                self.rect.x = 180
+                self.rect.y = 455
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 4 :
+                self.rect.x = 480
+                self.rect.y = 650
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
+            if game.nb_monstres == 5 :
+                self.rect.x = 1000
+                self.rect.y = 390
+                self.xg = (self.rect.x)-100
+                self.xd = self.rect.x
+                self.count = 1
 
-        self.rect = monst.get_rect()
-        self.rect.x = 400 + random.randint(0, 300)
+        #if game.level.nblvl == 1:
+        #    monst = self.image = pygame.image.load("images/oliveMs.png")
+        #elif game.level.nblvl == 2:
+        #    monst = self.image = pygame.image.load("images/oignon.png")
+        #elif game.level.nblvl == 3:
+        #    monst = self.image = pygame.image.load("images/concombre.png")
+        #elif game.level.nblvl == 0:
+        #    monst = self.image = pygame.image.load("images/Boss1.png")
+
+        #self.rect = monst.get_rect()
+        #self.rect.x = 400 + random.randint(0, 300)
+        #self.rect.x = 416
         #bordure de deplacement des monstres
-        self.xg = (self.rect.x)-100
-        self.xd = self.rect.x
-        self.count = 1
-        self.rect.y = 608 
-        self.velocity = 2 + random.randint(0, 2)
+        #self.xg = (self.rect.x)-100
+        #self.xd = self.rect.x
+        #self.count = 1
+        #self.rect.y = 606 
+        self.velocity = 2
 
     def damage(self, amount):
         #infliger les degats

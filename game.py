@@ -29,19 +29,31 @@ class Game :
         self.nb_monstres = 0
 
         if self.level.nblvl == 1:
+            self.nb_monstres = 1
+            self.spawn_monster()
+            self.nb_monstres = 2
+            self.spawn_monster()
             self.nb_monstres = 3
             self.spawn_monster()
-            self.spawn_monster()
         elif self.level.nblvl == 2:
+            self.nb_monstres = 1
+            self.spawn_monster()
+            self.nb_monstres = 2
+            self.spawn_monster()
+            self.nb_monstres = 3
+            self.spawn_monster()
             self.nb_monstres = 4
             self.spawn_monster()
-            self.spawn_monster()
-            self.spawn_monster()
         elif self.level.nblvl == 3 :
+            self.nb_monstres = 1
+            self.spawn_monster()
+            self.nb_monstres = 2
+            self.spawn_monster()
+            self.nb_monstres = 3
+            self.spawn_monster()
+            self.nb_monstres = 4
+            self.spawn_monster()
             self.nb_monstres = 5
-            self.spawn_monster()
-            self.spawn_monster()
-            self.spawn_monster()
             self.spawn_monster()
 
         #self.levelnumber = level.getNbLvl()

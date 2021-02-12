@@ -10,7 +10,7 @@ import random
 width = 1024
 height = 768
 rows = 32
-currentLevel = 0
+currentLevel = 2
 
 # Pygame initialization
 pygame.init()
@@ -119,10 +119,9 @@ def redrawWindow(lvl,level,game):
         plat.draw(win)
 
     game.drawScore(win)
-    print(game.score)
 
     game.player.draw(win)
-    #win.blit(game.score_text, (20,20))
+    game.player.update_health_bar(win)
 
 def main():
     # Game runing variables
@@ -134,6 +133,8 @@ def main():
     finMenu = False
     game_Over = game.game_over 
     est_vivant = game.player.health >= 1
+    score = 0
+    Victoire = False
     
     
     while running:
@@ -173,16 +174,18 @@ def main():
                             game.player.nb_projectiles = 0
                         
                         
-                        
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
             game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
-                lvle += 1
-                level,game=chgmtNiv(lvle)
-                print(lvle)
+                if lvle == 3:
+                    Victoire = True
+                else :
+                    score += game.score
+                    lvle += 1
+                    level,game=chgmtNiv(lvle)
                        
             
               
@@ -226,6 +229,7 @@ def main():
             win.blit(gameOver, (0,0))
             win.blit(game.score_text, (20,20))
             
+        elif Victoire == True:
             
 
         

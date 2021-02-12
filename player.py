@@ -38,8 +38,8 @@ class Player(pygame.sprite.Sprite) :
             self.rect.x = 10
             self.rect.y = 10
         elif Level.getNbLvl(self.game.level) == 3:
-            self.rect.x = 0
-            self.rect.y = 0
+            self.rect.x = 512
+            self.rect.y = 200
 
         self.win = True
 
