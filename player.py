@@ -159,7 +159,7 @@ class Player(pygame.sprite.Sprite) :
             if i == "banane":
                 self.attack += 10
             if i == "orange":
-                self.velocity += 0.5
+                self.velocity += 1
             if i == "fraise":
                 self.max_health += 50
                 self.health += 50

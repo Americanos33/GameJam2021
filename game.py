@@ -9,7 +9,7 @@ import random
 
 class Game :
 
-    def __init__(self, level):
+    def __init__(self, level, score):
         self.is_playing = False
         self.menu = True
         self.game_over = False 
@@ -31,7 +31,7 @@ class Game :
         self.pasteque_list = pygame.sprite.Group()
 
         self.all_walls = pygame.sprite.Group()
-        self.score = 0
+        self.score = score
         self.all_decors = pygame.sprite.Group()
         self.pressed = {}
 

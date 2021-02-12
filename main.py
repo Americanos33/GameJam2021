@@ -22,10 +22,10 @@ clock = pygame.time.Clock()
 
 
 
-def chgmtNiv(lvl):
+def chgmtNiv(lvl, score):
     level = Level.Level(lvl)
     level.set_LevelPlatformList()
-    game = Game(level)
+    game = Game(level, score)
     return (level, game)
 
 
@@ -146,7 +146,7 @@ def main():
     # Game runing variables
     running = True
     lvle=4
-    level,game=chgmtNiv(lvle)
+    level,game=chgmtNiv(lvle, 0)
 
     inGame = game.is_playing
     inMenu = game.menu
@@ -160,7 +160,7 @@ def main():
     s = 0
 
     nbmorts = 0
-    
+    scorecheck = False    
     
     while running:
         
@@ -217,14 +217,12 @@ def main():
                     a = game.player.attack
                     h = game.player.health
                     s = game.player.velocity
-                    score += game.score
                     lvle += 1
-                    level,game=chgmtNiv(lvle)
+                    level,game=chgmtNiv(lvle, score)
                     game.updatePerso(a, h, s)
                 else :
-                    score += game.score
                     lvle += 1
-                    level,game=chgmtNiv(lvle)
+                    level,game=chgmtNiv(lvle, score)
                     game.updatePerso(a, h, s)
 
             if lvle == 0 and game.nb_fruits_graille == 5 :
@@ -232,9 +230,8 @@ def main():
                 a = game.player.attack
                 h = game.player.health
                 s = game.player.velocity
-                score += game.score
                 lvle += 1
-                level,game=chgmtNiv(lvle)
+                level,game=chgmtNiv(lvle, score)
                 game.updatePerso(a, h, s)
                        
             
@@ -264,7 +261,8 @@ def main():
             nbmorts += 1
             game_Over = False
             inGame = True
-            level,game=chgmtNiv(lvle)
+            score = game.score
+            level,game=chgmtNiv(lvle, score)
             game.updatePerso(a, h, s)
             game.player.est_vivant= True
                     
@@ -284,11 +282,26 @@ def main():
                         sys.exit()
             win.fill((0,0,0))
             win.blit(gameWin, (0,0))
-            win.blit(game.score_text, (600,500))
+
+
+            if scorecheck == False :
+                if nbmorts == 0 :
+                    score = score *2
+                    scorecheck = True
+                else :
+                    score = score / nbmorts
+                    scorecheck = True
+
+            font = pygame.font.SysFont("monospace", 16)
+            score_text = font.render(f"Score :  {score}",1,(255,255,255))
+
+            win.blit(score_text, (600,500))
             
 
         pygame.display.update()
         pygame.time.delay(2)
         clock.tick(60)
+
+    win.blit
 
 main()
