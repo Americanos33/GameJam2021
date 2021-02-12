@@ -33,6 +33,9 @@ class Monster(pygame.sprite.Sprite):
                 self.count = 1
 
         elif game.level.nblvl == 2:
+            self.max_health = 150
+            self.health = self.max_health
+
             monst = self.image = pygame.image.load("images/oignon.png")
             self.rect = monst.get_rect()
             if game.nb_monstres == 1 :
@@ -61,6 +64,9 @@ class Monster(pygame.sprite.Sprite):
                 self.count = 1
   
         elif game.level.nblvl == 3:
+            self.max_health = 200
+            self.health = self.max_health
+
             monst = self.image = pygame.image.load("images/concombre.png")
             self.rect = monst.get_rect()
             if game.nb_monstres == 1 :
@@ -94,23 +100,6 @@ class Monster(pygame.sprite.Sprite):
                 self.xd = self.rect.x
                 self.count = 1
 
-        #if game.level.nblvl == 1:
-        #    monst = self.image = pygame.image.load("images/oliveMs.png")
-        #elif game.level.nblvl == 2:
-        #    monst = self.image = pygame.image.load("images/oignon.png")
-        #elif game.level.nblvl == 3:
-        #    monst = self.image = pygame.image.load("images/concombre.png")
-        #elif game.level.nblvl == 0:
-        #    monst = self.image = pygame.image.load("images/Boss1.png")
-
-        #self.rect = monst.get_rect()
-        #self.rect.x = 400 + random.randint(0, 300)
-        #self.rect.x = 416
-        #bordure de deplacement des monstres
-        #self.xg = (self.rect.x)-100
-        #self.xd = self.rect.x
-        #self.count = 1
-        #self.rect.y = 606 
         self.velocity = 2
 
     def damage(self, amount):

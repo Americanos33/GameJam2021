@@ -30,6 +30,7 @@ class Projectile(pygame.sprite.Sprite):
             self.suppr()  
             #infliger des dégats
             monster.damage(self.player.attack)
+            print(self.player.attack)
 
     def move_g(self):
 

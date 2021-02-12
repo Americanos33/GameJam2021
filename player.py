@@ -11,8 +11,8 @@ class Player(pygame.sprite.Sprite) :
     def __init__(self, game):
         super().__init__()
         self.game = game
-        self.health = 100
         self.max_health = 100
+        self.health = self.max_health
         self.attack = 30
         self.velocity = 3
         self.est_vivant = True
@@ -75,7 +75,7 @@ class Player(pygame.sprite.Sprite) :
         #moves the character to the Right and changes the character image accordingly
         self.rect.x += self.velocity
         self.printImage(1)
-        self.game.check_collisionFruit(self, self.game.all_fruits)
+        self.game.check_collisionFruit(self)
         if self.game.check_collisionWallX(self, self.game.all_walls):
             self.rect.x -= self.velocity
 
@@ -84,7 +84,7 @@ class Player(pygame.sprite.Sprite) :
         #moves the character to the Left and changes the character image accordingly
         self.rect.x -= self.velocity
         self.printImage(2)
-        self.game.check_collisionFruit(self, self.game.all_fruits)
+        self.game.check_collisionFruit(self)
         if self.game.check_collisionWallX(self, self.game.all_walls):
             self.rect.x += self.velocity
             
@@ -117,7 +117,7 @@ class Player(pygame.sprite.Sprite) :
         if self.game.check_allCollisions(self, self.game.all_walls):
             self.rect.y += (10 * (self.saut/2))
 
-        self.game.check_collisionFruit(self, self.game.all_fruits)
+        self.game.check_collisionFruit(self)
 
         
 
@@ -150,3 +150,26 @@ class Player(pygame.sprite.Sprite) :
         #dessiner notre barre de vie
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
         pygame.draw.rect(surface,bar_color, bar_position)
+
+    def checkfruitsGraille(self) :
+        for i in self.game.fruits_graille :
+            print(i)
+
+        for i in self.game.fruits_graille :
+            if i == "banane":
+                self.attack += 10
+            if i == "orange":
+                self.velocity += 0.5
+            if i == "fraise":
+                self.max_health += 50
+                self.health += 50
+
+        print("attack = ")
+        print(self.attack)
+
+        print("health = ")
+        print(self.health)
+        
+        print("speed = ")
+        print(self.velocity)
+        

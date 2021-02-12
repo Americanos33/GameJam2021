@@ -20,9 +20,14 @@ class Level :
                 self.levelList = []
                 
                 self.wall_list = pygame.sprite.Group()
-                self.fruits_list = pygame.sprite.Group()
                 self.decor_collision_list = pygame.sprite.Group()
                 self.decor_simple_list = pygame.sprite.Group()
+
+                self.banane_list = pygame.sprite.Group()
+                self.orange_list = pygame.sprite.Group()
+                self.fraise_list = pygame.sprite.Group()
+                self.date_list = pygame.sprite.Group()
+                self.pasteque_list = pygame.sprite.Group()
 
         def readMap(self):
 
@@ -46,15 +51,15 @@ class Level :
                         if self.levelList[j][i] == '1' :
                             self.wall_list.add(Wall(i,j))
                         if self.levelList[j][i] == '2' :
-                            self.fruits_list.add((Banane(i,j)))
+                            self.banane_list.add((Banane(i,j)))
                         if self.levelList[j][i] == '3' :
-                            self.fruits_list.add((Orange(i,j)))
+                            self.orange_list.add((Orange(i,j)))
                         if self.levelList[j][i] == '4' :
-                            self.fruits_list.add((Fraise(i,j)))
+                            self.fraise_list.add((Fraise(i,j)))
                         if self.levelList[j][i] == '5' :
-                            self.fruits_list.add((Date(i,j)))
+                            self.date_list.add((Date(i,j)))
                         if self.levelList[j][i] == '6' :
-                            self.fruits_list.add((Pasteque(i,j)))
+                            self.pasteque_list.add((Pasteque(i,j)))
                         if self.levelList[j][i] == '7' :
                             self.decor_simple_list.add((Decor(i,j, "tree")))
                         if self.levelList[j][i] == '8' :
