@@ -108,6 +108,9 @@ def redrawWindow(lvl,level,game, nbmorts):
     for projectile in game.player.tt_projectiles1:
         projectile.move_g()
 
+    for projectile in game.boss.tt_projectiles1:
+        projectile.move_g()
+
     for projectile in game.player.tt_projectiles2:
         projectile.move_d()
 
@@ -202,7 +205,8 @@ def main():
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut()        
+            game.player.moveSaut() 
+            game.boss.lancer_projectile1()       
 
             if game.check_collisionMonstre(game.player, game.all_decors):
                 if lvle >= 4:

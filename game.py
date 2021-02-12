@@ -20,6 +20,8 @@ class Game :
         self.tt_players.add(self.player)
 
         self.tt_monsters = pygame.sprite.Group()
+
+        self.boss = Boss(self)
         self.tt_boss = pygame.sprite.Group()
         
         self.banane_list = pygame.sprite.Group()
