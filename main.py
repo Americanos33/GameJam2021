@@ -83,7 +83,7 @@ def drawGrid(w, r, surface):
 
     
 
-def redrawWindow(lvl,level,game):
+def redrawWindow(lvl,level,game, nbmorts):
     
     
     if lvl > 0 :
@@ -134,6 +134,7 @@ def redrawWindow(lvl,level,game):
         plat.draw(win)
 
     game.drawScore(win)
+    game.drawLives(win, nbmorts)
 
     game.player.draw(win)
     game.player.update_health_bar(win)
@@ -154,13 +155,15 @@ def main():
     a = 0
     h = 0
     s = 0
+
+    nbmorts = 0
     
     
     while running:
         
         if inGame:
             
-            redrawWindow(lvle,level,game)  
+            redrawWindow(lvle,level,game, nbmorts)  
             game.player.gravite()
             game.player.nb_projectiles += 1
 
@@ -254,6 +257,7 @@ def main():
             win.blit(menuBackground, (0,0))
         
         elif game_Over:
+            nbmorts += 1
             game_Over = False
             inGame = True
             level,game=chgmtNiv(lvle)
