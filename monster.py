@@ -107,8 +107,13 @@ class Monster(pygame.sprite.Sprite):
         self.health -= amount
 
         #verifier si ses pv <= 0
-        if self.health <= 0: 
-            self.game.add_score(20)
+        if self.health <= 0:
+            if self.game.level.nblvl == 1:
+                self.game.add_score(20)
+            elif self.game.level.nblvl == 2:
+                self.game.add_score(30)
+            elif self.game.level.nblvl == 3:
+                self.game.add_score(40)
             
             #Supprimer le monstre
             self.game.tt_monsters.remove(self) #fais gaffe ça supprime tous les monstres 
