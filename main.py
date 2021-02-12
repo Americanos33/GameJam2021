@@ -65,6 +65,9 @@ menuBackground = pygame.transform.scale(menuBackground, (width, height))
 gameOver = pygame.image.load('images/Game_Over.png')
 gameOver= pygame.transform.scale(gameOver, (width,height))
 
+gameWin = pygame.image.load('images/fin_bed.png')
+gameWin = pygame.transform.scale(gameWin, (width,height))
+
 
 def drawGrid(w, r, surface):
     sizeBtwn = w // r
@@ -126,13 +129,16 @@ def redrawWindow(lvl,level,game):
 def main():
     # Game runing variables
     running = True
-    lvle=0
+    lvle=3
     level,game=chgmtNiv(lvle)
+
     inGame = game.is_playing
     inMenu = game.menu
     finMenu = False
     game_Over = game.game_over 
+    game_Win = game.game_wined
     est_vivant = game.player.health >= 1
+    
     score = 0
     
     
@@ -179,15 +185,17 @@ def main():
             game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
+                if lvle >= 3:
+                    game_Win = True
+                    inGame = False
+                else:
                     score += game.score
                     lvle += 1
                     level,game=chgmtNiv(lvle)
-                       
-            
-              
+           
         else:      
             inGame = False
-            game.player.est_vivant= False
+            
 
         if inMenu:
             for event in pygame.event.get():
@@ -218,12 +226,26 @@ def main():
                     if event.key == K_ESCAPE :
                         pygame.quit()
                         sys.exit()
-                    if event.key == K_SPACE :
-                        inMenu = True
-                        inGame = False
+                    
             win.fill((0,0,0))
             win.blit(gameOver, (0,0))
             win.blit(game.score_text, (20,20))
+
+        elif game_Win:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    inGame = False
+                    pygame.display.quit()
+                    pygame.quit()
+                    sys.exit()
+                    running = False
+                if event.type == KEYDOWN :
+                    if event.key == K_ESCAPE :
+                        pygame.quit()
+                        sys.exit()
+            win.fill((0,0,0))
+            win.blit(gameWin, (0,0))
+            win.blit(game.score_text, (600,500))
             
 
         pygame.display.update()
