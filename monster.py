@@ -15,13 +15,13 @@ class Monster(pygame.sprite.Sprite):
             self.rect = monst.get_rect()
             if game.nb_monstres == 1 :
                 self.rect.x = 704
-                self.rect.y = 200
+                self.rect.y = 130
                 self.xg = (self.rect.x)-100
                 self.xd = self.rect.x
                 self.count = 1
             elif game.nb_monstres == 2 :
                 self.rect.x = 192
-                self.rect.y = 290
+                self.rect.y = 260
                 self.xg = (self.rect.x)-100
                 self.xd = self.rect.x
                 self.count = 1

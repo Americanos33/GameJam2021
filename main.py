@@ -94,6 +94,8 @@ def redrawWindow(lvl,level,game, nbmorts):
     game.player.tt_projectiles1.draw(win)
     game.player.tt_projectiles2.draw(win)
     game.tt_monsters.draw(win)
+    game.boss.tt_projectiles1.draw(win)
+    game.boss.tt_projectiles2.draw(win)
     
     #drawGrid(width, rows, win)
     #pygame.draw.rect(win, (160,82,45), (0,668,1028,100))
@@ -106,9 +108,6 @@ def redrawWindow(lvl,level,game, nbmorts):
         decor.draw(win)
 
     for projectile in game.player.tt_projectiles1:
-        projectile.move_g()
-
-    for projectile in game.boss.tt_projectiles1:
         projectile.move_g()
 
     for projectile in game.player.tt_projectiles2:
@@ -136,7 +135,16 @@ def redrawWindow(lvl,level,game, nbmorts):
     for plat in level.wall_list :
         plat.draw(win)
 
-    game.tt_boss.draw(win)
+    for b in game.tt_boss:
+        b.deplaM()
+        b.draw(win)
+        b.update_health_bar(win)
+
+    for projectile in game.boss.tt_projectiles1:
+        projectile.move_g()
+
+    for projectile in game.boss.tt_projectiles2:
+        projectile.move_d()
 
     game.drawScore(win)
     game.drawLives(win, nbmorts)
@@ -164,13 +172,21 @@ def main():
     nbmorts = 0
     scorecheck = False    
     
+    t = 0
+
     while running:
         
         if inGame:
-            
+        
             redrawWindow(lvle,level,game, nbmorts)  
+
+            if (game.boss.nb_projectiles >= 100) and game.level.nblvl == 4:
+                game.boss.lancer_projectile1()
+                game.boss.nb_projectiles = 0
+                
             game.player.gravite()
             game.player.nb_projectiles += 1
+            game.boss.nb_projectiles += 1
 
             if not game.player.est_vivant:
                 game_Over = True
@@ -202,13 +218,20 @@ def main():
                         if game.player.nb_projectiles >= 30:
                             game.player.lancer_projectile2()
                             game.player.nb_projectiles = 0
+                    if event.key == pygame.K_a:
+                        if game.boss.nb_projectiles >= 20:
+                            game.boss.lancer_projectile1()
+                            game.boss.nb_projectiles = 0
+                    if event.key == pygame.K_z:
+                        if game.boss.nb_projectiles >= 20:
+                            game.boss.lancer_projectile2()
+                            game.boss.nb_projectiles = 0
                         
                         
                 elif event.type == KEYUP:
                     game.pressed[event.key] = False
 
-            game.player.moveSaut() 
-            game.boss.lancer_projectile1()       
+            game.player.moveSaut()     
 
             if game.check_collisionMonstre(game.player, game.all_decors):
                 if lvle >= 4:
@@ -223,6 +246,7 @@ def main():
                     level,game=chgmtNiv(lvle, score)
                     game.updatePerso(a, h, s)
                 else :
+                    score = game.score
                     lvle += 1
                     level,game=chgmtNiv(lvle, score)
                     game.updatePerso(a, h, s)
@@ -288,16 +312,19 @@ def main():
 
             if scorecheck == False :
                 if nbmorts == 0 :
-                    score = score *2
+                    score = (score + 100) *2
                     scorecheck = True
                 else :
-                    score = score / nbmorts
+                    score = (score + 100) / nbmorts
                     scorecheck = True
 
-            font = pygame.font.SysFont("monospace", 16)
-            score_text = font.render(f"Score :  {score}",1,(255,255,255))
+            font = pygame.font.SysFont("monospace", 32)
+            score_text = font.render(f"Score :  {score}",1,(0,0,0))
+            if nbmorts == 0 :
+                text = font.render("(Score doublé car pas de mort !)",1,(0,0,0))
 
             win.blit(score_text, (600,500))
+            win.blit(text, (415,550))
             
 
         pygame.display.update()

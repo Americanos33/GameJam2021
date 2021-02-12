@@ -177,13 +177,22 @@ class Game :
             self.all_decors.add(x)
 
     def drawScore(self, surface):
-        self.font = pygame.font.SysFont("monospace", 16)
-        self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
+        if self.level.nblvl == 0 :
+            coul = (0,0,0)
+        else :
+            coul = (255,255,255)
+
+        self.font = pygame.font.SysFont("monospace", 22)
+        self.score_text = self.font.render(f"Score :  {self.score}",1,coul)
         surface.blit(self.score_text, (20,20))
 
     def drawLives(self, surface, nb):
-        self.font = pygame.font.SysFont("monospace", 16)
-        self.morts_txt = self.font.render(f"Morts :  {nb}",1,(255,255,255))
+        if self.level.nblvl == 0 :
+            coul = (0,0,0)
+        else :
+            coul = (255,255,255)
+        self.font = pygame.font.SysFont("monospace", 22)
+        self.morts_txt = self.font.render(f"Morts :  {nb}",1,coul)
         surface.blit(self.morts_txt, (20,40))
         
     def updatePerso(self, a, h, s):
@@ -191,3 +200,7 @@ class Game :
         self.player.health = h
         self.player.max_health = h
         self.player.velocity = s
+
+    def bossDead(self):
+        for i in self.tt_boss :
+           return i.health <= 0

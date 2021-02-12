@@ -10,20 +10,21 @@ class Boss(pygame.sprite.Sprite):
         self.max_health = 400
         self.attack = 10
         self.velocity = 5
+        self.count = 1
 
         self.tt_projectiles1 = pygame.sprite.Group()
         self.tt_projectiles2 = pygame.sprite.Group()
         self.nb_projectiles = 20
     
-        if self.game.level.nblvl == 4:
-            self.image = pygame.image.load("images/Boss1.png").convert_alpha()
-            self.image = pygame.transform.smoothscale(self.image, (256,256))
-            self.rect = self.image.get_rect()
-                
-            self.rect.x = 350
-            self.rect.y = 400
-            self.xg = (self.rect.x)-100
-            self.xd = self.rect.x
+
+        self.image = pygame.image.load("images/Boss1.png").convert_alpha()
+        self.image = pygame.transform.smoothscale(self.image, (256,256))
+        self.rect = self.image.get_rect()
+            
+        self.rect.x = 450
+        self.rect.y = 400
+        self.yg = (self.rect.y)-100
+        self.yd = self.rect.y + 100
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -63,7 +64,7 @@ class Boss(pygame.sprite.Sprite):
             self.count *= -1
 
         if self.count > 0 :
-            if self.rect.y < self.xy:
+            if self.rect.y < self.yd:
                 if not self.game.check_collisionMonstre(self,self.game.tt_players):
                     self.rect.y += self.velocity
                 #si le monstre est en collision avec le joueur il inflige des degats
@@ -78,5 +79,7 @@ class Boss(pygame.sprite.Sprite):
 
 
     def lancer_projectile1(self):
-        self.tt_projectiles1.add(Projectile(self))
+        self.tt_projectiles1.add(Projectile(self, "boss"))
                 
+    def lancer_projectile2(self):
+        self.tt_projectiles2.add(Projectile(self, "boss"))

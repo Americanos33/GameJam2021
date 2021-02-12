@@ -128,10 +128,10 @@ class Player(pygame.sprite.Sprite) :
         #surface.blit(r, self.rect)
 
     def lancer_projectile1(self):
-        self.tt_projectiles1.add(Projectile(self))
+        self.tt_projectiles1.add(Projectile(self, "player"))
 
     def lancer_projectile2(self):
-        self.tt_projectiles2.add(Projectile(self))
+        self.tt_projectiles2.add(Projectile(self, "player"))
 
     def update_health_bar(self, surface):
         #couleur de la jauge (vert)
@@ -152,9 +152,6 @@ class Player(pygame.sprite.Sprite) :
         pygame.draw.rect(surface,bar_color, bar_position)
 
     def checkfruitsGraille(self) :
-        for i in self.game.fruits_graille :
-            print(i)
-
         for i in self.game.fruits_graille :
             if i == "banane":
                 self.attack += 10
