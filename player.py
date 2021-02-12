@@ -163,13 +163,4 @@ class Player(pygame.sprite.Sprite) :
             if i == "fraise":
                 self.max_health += 50
                 self.health += 50
-
-        print("attack = ")
-        print(self.attack)
-
-        print("health = ")
-        print(self.health)
-        
-        print("speed = ")
-        print(self.velocity)
         
