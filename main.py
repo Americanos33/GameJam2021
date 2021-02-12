@@ -141,15 +141,14 @@ def redrawWindow(lvl,level,game):
 def main():
     # Game runing variables
     running = True
-    lvle=3
+    lvle=0
     level,game=chgmtNiv(lvle)
 
     inGame = game.is_playing
     inMenu = game.menu
-    finMenu = False
+    
     game_Over = game.game_over 
     game_Win = game.game_wined
-    est_vivant = game.player.health >= 1
     
     score = 0
     a = 0
@@ -164,6 +163,9 @@ def main():
             redrawWindow(lvle,level,game)  
             game.player.gravite()
             game.player.nb_projectiles += 1
+
+            if not game.player.est_vivant:
+                game_Over = True
 
             if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < win.get_width():
                     game.player.moveRight()
@@ -247,26 +249,17 @@ def main():
                         inMenu = False
                         inGame = True
                         game.player.est_vivant= True
-                        print(inGame)
+                        
             win.fill((0,0,0))
             win.blit(menuBackground, (0,0))
         
-        elif not game.player.est_vivant:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    inMenu = False
-                    pygame.display.quit()
-                    pygame.quit()
-                    sys.exit()
-                    running = False
-                if event.type == KEYDOWN :
-                    if event.key == K_ESCAPE :
-                        pygame.quit()
-                        sys.exit()
+        elif game_Over:
+            game_Over = False
+            inGame = True
+            level,game=chgmtNiv(lvle)
+            game.player.est_vivant= True
                     
-            win.fill((0,0,0))
-            win.blit(gameOver, (0,0))
-            win.blit(game.score_text, (20,20))
+            
 
         elif game_Win:
             for event in pygame.event.get():
