@@ -257,6 +257,7 @@ def main():
             game_Over = False
             inGame = True
             level,game=chgmtNiv(lvle)
+            game.updatePerso(a, h, s)
             game.player.est_vivant= True
                     
             
