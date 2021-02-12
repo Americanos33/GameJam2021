@@ -12,6 +12,7 @@ class Game :
         self.is_playing = False
         self.menu = True
         self.game_over = False 
+        self.game_wined = False
         self.tt_players = pygame.sprite.Group()
         self.level = level
         self.player = Player(self)
@@ -169,6 +170,7 @@ class Game :
         self.font = pygame.font.SysFont("monospace", 16)
         self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
         surface.blit(self.score_text, (20,20))
+
         
     def updatePerso(self, a, h, s):
         self.player.attack = a
