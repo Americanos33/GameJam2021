@@ -18,11 +18,20 @@ class Game :
         self.tt_players.add(self.player)
 
         self.tt_monsters = pygame.sprite.Group()
-        self.all_fruits = pygame.sprite.Group()
+        
+        self.banane_list = pygame.sprite.Group()
+        self.orange_list = pygame.sprite.Group()
+        self.fraise_list = pygame.sprite.Group()
+        self.date_list = pygame.sprite.Group()
+        self.pasteque_list = pygame.sprite.Group()
+
         self.all_walls = pygame.sprite.Group()
         self.score = 0
         self.all_decors = pygame.sprite.Group()
         self.pressed = {}
+
+        self.fruits_graille = []
+        self.nb_fruits_graille = 0
 
         self.level = level
 
@@ -81,8 +90,46 @@ class Game :
     def check_allCollisions(self, sprite, group):
         return pygame.sprite.spritecollideany(sprite, group)
 
-    def check_collisionFruit(self, sprite, group):
+    def check_collisionFruit(self, sprite):
+        if self.check_collisionBanane(sprite, self.banane_list) :
+            self.fruits_graille.append("banane")
+            self.nb_fruits_graille += 1
+            return True
+        elif self.check_collisionOrange(sprite, self.orange_list) :
+            self.fruits_graille.append("orange")
+            self.nb_fruits_graille += 1
+            return True
+        elif self.check_collisionFraise(sprite, self.fraise_list) :
+            self.fruits_graille.append("fraise")
+            self.nb_fruits_graille += 1
+            return True
+        elif self.check_collisionDate(sprite, self.date_list) :
+            self.fruits_graille.append("date")
+            self.nb_fruits_graille += 1
+            return True
+        elif self.check_collisionPasteque(sprite, self.pasteque_list) :
+            self.fruits_graille.append("pasteque")
+            self.nb_fruits_graille += 1
+            return True
+        else :
+            return False
+
+    def check_collisionOrange(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
+
+    def check_collisionBanane(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
+
+    def check_collisionFraise(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
+
+    def check_collisionDate(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
+
+    def check_collisionPasteque(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, True, pygame.sprite.collide_mask)
+
+
 
     def check_collisionMonstre(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
@@ -96,8 +143,20 @@ class Game :
             self.all_walls.add(w)
     
     def spawn_fruits(self):
-        for f in self.level.fruits_list :
-            self.all_fruits.add(f)
+        for f in self.level.orange_list :
+            self.orange_list.add(f)
+
+        for f in self.level.pasteque_list :
+            self.pasteque_list.add(f)
+
+        for f in self.level.fraise_list :
+            self.fraise_list.add(f)
+
+        for f in self.level.banane_list :
+            self.banane_list.add(f)
+
+        for f in self.level.date_list :
+            self.date_list.add(f)
     
     def add_score(self, point):    
         self.score +=point
@@ -111,3 +170,8 @@ class Game :
         self.score_text = self.font.render(f"Score :  {self.score}",1,(255,255,255))
         surface.blit(self.score_text, (20,20))
         
+    def updatePerso(self, a, h, s):
+        self.player.attack = a
+        self.player.health = h
+        self.player.max_health = h
+        self.player.velocity = s

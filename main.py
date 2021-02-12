@@ -112,8 +112,20 @@ def redrawWindow(lvl,level,game):
         monster.deplaM()
         monster.update_health_bar(win)
 
-    for plat in level.fruits_list :
-        plat.draw(win)
+    for f in level.pasteque_list :
+        f.draw(win)
+
+    for f in level.banane_list :
+        f.draw(win)
+
+    for f in level.orange_list :
+        f.draw(win)
+
+    for f in level.fraise_list :
+        f.draw(win)
+
+    for f in level.date_list :
+        f.draw(win)
 
     for plat in level.wall_list :
         plat.draw(win)
@@ -134,6 +146,9 @@ def main():
     game_Over = game.game_over 
     est_vivant = game.player.health >= 1
     score = 0
+    a = 0
+    h = 0
+    s = 0
     
     
     while running:
@@ -179,9 +194,30 @@ def main():
             game.player.moveSaut()        
 
             if game.check_collisionMonstre(game.player, game.all_decors):
+                if lvle == 0:
+                    game.player.checkfruitsGraille()
+                    a = game.player.attack
+                    h = game.player.health
+                    s = game.player.velocity
                     score += game.score
                     lvle += 1
                     level,game=chgmtNiv(lvle)
+                    game.updatePerso(a, h, s)
+                else :
+                    score += game.score
+                    lvle += 1
+                    level,game=chgmtNiv(lvle)
+                    game.updatePerso(a, h, s)
+
+            if lvle == 0 and game.nb_fruits_graille == 5 :
+                game.player.checkfruitsGraille()
+                a = game.player.attack
+                h = game.player.health
+                s = game.player.velocity
+                score += game.score
+                lvle += 1
+                level,game=chgmtNiv(lvle)
+                game.updatePerso(a, h, s)
                        
             
               
